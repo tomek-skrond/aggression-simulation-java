@@ -33,13 +33,15 @@ public abstract class Organism {
         this.reproductionRate = _reproductionRate;
         this.hostility = _hostility;
         this.foodTaken = _foodTaken;
+        this.isAlive = _isAlive;
     }
 
     @Override
     public String toString(){
         return "repr_rate: " + this.reproductionRate + "\n" +
                 "hostility: " + this.hostility + "\n" +
-                "food_taken: " + "\n";
+                "food_taken: " + this.foodTaken + "\n" +
+                "is_alive: " + this.isAlive;
     }
 
     public double getReproductionRate() {
@@ -64,6 +66,14 @@ public abstract class Organism {
 
     public void setFoodTaken(double foodTaken) {
         this.foodTaken = foodTaken;
+    }
+
+    public double getIsAlive() {
+        return isAlive;
+    }
+
+    public void setIsAlive(double isAlive) {
+        this.isAlive = isAlive;
     }
 
 }
