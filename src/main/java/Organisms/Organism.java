@@ -7,10 +7,10 @@ package Organisms;
 public abstract class Organism {
 
 
-    private double reproductionRate;
-    protected double hostility;
-    private double foodTaken;
-    protected double isAlive;
+    private Double reproductionRate;
+    protected Double hostility;
+    private Double foodTaken;
+    protected Double isAlive;
 
     /**
         Default constructor/Konstruktor domyślny
@@ -44,35 +44,35 @@ public abstract class Organism {
                 "is_alive: " + this.isAlive;
     }
 
-    public double getReproductionRate() {
-        return this.reproductionRate;
+    public Double getReproductionRate() {
+        return reproductionRate;
     }
 
-    public void setReproductionRate(double reproductionRate) {
+    public void setReproductionRate(Double reproductionRate) {
         this.reproductionRate = reproductionRate;
     }
 
-    public double getHostility() {
-        return this.hostility;
+    public Double getHostility() {
+        return hostility;
     }
 
-    public void setHostility(double hostility) {
+    public void setHostility(Double hostility) {
         this.hostility = hostility;
     }
 
-    public double getFoodTaken() {
-        return this.foodTaken;
+    public Double getFoodTaken() {
+        return foodTaken;
     }
 
-    public void setFoodTaken(double foodTaken) {
+    public void setFoodTaken(Double foodTaken) {
         this.foodTaken = foodTaken;
     }
 
-    public double getIsAlive() {
+    public Double getIsAlive() {
         return isAlive;
     }
 
-    public void setIsAlive(double isAlive) {
+    public void setIsAlive(Double isAlive) {
         this.isAlive = isAlive;
     }
 
