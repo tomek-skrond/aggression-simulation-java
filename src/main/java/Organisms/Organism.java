@@ -29,7 +29,8 @@ public abstract class Organism {
      * @param _foodTaken -- jedzenie, które udało się zdobyć przez organizm w iteracji
      * @param _isAlive -- określa prawdopodobieństwo przeżycia organizmu w następnym cyklu
      */
-    public Organism(double _reproductionRate,double _hostility, double _foodTaken,double _isAlive){
+    public Organism(Double _reproductionRate,Double _hostility,
+                    Double _foodTaken,Double _isAlive){
         this.reproductionRate = _reproductionRate;
         this.hostility = _hostility;
         this.foodTaken = _foodTaken;
