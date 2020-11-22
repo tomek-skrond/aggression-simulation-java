@@ -9,6 +9,7 @@ public class AggressiveOrganism extends Organism{
      **/
     public AggressiveOrganism(){
         super();
+        this.hostility = 2.0;
     }
 
     /**

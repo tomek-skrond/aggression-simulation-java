@@ -6,7 +6,7 @@ import org.junit.Test;
 //import org.junit.jupiter.api.Test;
 
 public class AggressiveOrganismTest extends TestCase {
-    AggressiveOrganism testAggressiveDefaultConstructor = new AggressiveOrganism();
+    AggressiveOrganism testAggressiveDefault = new AggressiveOrganism();
     AggressiveOrganism testAggressive = new AggressiveOrganism(0,2,0,1);
 
 
@@ -32,5 +32,13 @@ public class AggressiveOrganismTest extends TestCase {
         assertTrue(testAggressive.getHostility() == 2.0);
         assertTrue(testAggressive.getFoodTaken() == 0.0);
         assertTrue(testAggressive.getIsAlive() == 1.0);
+    }
+
+    @Test
+    public void testDefaultParameters(){
+        assertTrue(testAggressiveDefault.getReproductionRate() == 0.0);
+        assertTrue(testAggressiveDefault.getHostility() == 2.0);
+        assertTrue(testAggressiveDefault.getFoodTaken() == 0.0);
+        assertTrue(testAggressiveDefault.getIsAlive() == 1.0);
     }
 }

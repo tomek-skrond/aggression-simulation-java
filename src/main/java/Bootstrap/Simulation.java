@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.function.Consumer;
 
 
-public class Bootstrap{
+public class Simulation {
 
-    public Bootstrap(){
+    public Simulation(){
         System.out.println("konstruktor bootstrap");
 
     }

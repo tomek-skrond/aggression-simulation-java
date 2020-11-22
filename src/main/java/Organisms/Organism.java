@@ -8,18 +8,18 @@ public abstract class Organism {
 
 
     private double reproductionRate;
-    private double hostility;
+    protected double hostility;
     private double foodTaken;
-    public double isAlive;
+    protected double isAlive;
 
     /**
         Default constructor/Konstruktor domyślny
      **/
     public Organism(){
-        this.reproductionRate = 0;
-        this.hostility = 0;
-        this.foodTaken = 0;
-        this.isAlive = 0;
+        this.reproductionRate = 0.0;
+        this.hostility = 0.0;
+        this.foodTaken = 0.0;
+        this.isAlive = 1.0;
     }
 
     /**
