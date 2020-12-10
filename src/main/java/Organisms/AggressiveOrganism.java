@@ -3,7 +3,7 @@ package Organisms;
 import Organisms.Abstractions.Organism;
 
 /**
- * Organizm o charakterze agresywnym - współczynnik agresji = 2
+ * Organizm o charakterze agresywnym - współczynnik agresji = 1.5
  **/
 public class AggressiveOrganism extends Organism {
     /**
@@ -11,7 +11,7 @@ public class AggressiveOrganism extends Organism {
      **/
     public AggressiveOrganism(){
         super();
-        this.hostility = 2.0;
+        this.hostility = 1.5;
     }
 
     /**
@@ -24,7 +24,7 @@ public class AggressiveOrganism extends Organism {
 
     public AggressiveOrganism(AggressiveOrganism source){
         super(source);
-        this.hostility = 2.0;
+        this.hostility = 1.5;
     }
     @Override
     public Organism cloneObject(){
