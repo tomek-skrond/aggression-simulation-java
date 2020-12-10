@@ -1,10 +1,13 @@
-package Organisms;
+package Organisms.Abstractions;
 
+
+import Organisms.Interfaces.CanInteract;
+import Organisms.Interfaces.ICloneable;
 
 /**
     Organism abstraction/klasa abstrakcyjna dla organizmów
  **/
-public abstract class Organism {
+public abstract class Organism implements ICloneable, CanInteract {
 
 
     private Double reproductionRate;
@@ -37,6 +40,14 @@ public abstract class Organism {
         this.isAlive = _isAlive;
     }
 
+    public Organism(Organism source){
+        this();
+        this.foodTaken = source.foodTaken;
+        this.hostility = source.hostility;
+        this.reproductionRate = source.reproductionRate;
+        this.isAlive = source.isAlive;
+    }
+
     @Override
     public String toString(){
         return "repr_rate: " + this.reproductionRate + "\n" +
@@ -44,6 +55,7 @@ public abstract class Organism {
                 "food_taken: " + this.foodTaken + "\n" +
                 "is_alive: " + this.isAlive;
     }
+
 
     public Double getReproductionRate() {
         return reproductionRate;
@@ -57,9 +69,7 @@ public abstract class Organism {
         return hostility;
     }
 
-    public void setHostility(Double hostility) {
-        this.hostility = hostility;
-    }
+    public void setHostility(Double hostility) { this.hostility = hostility; }
 
     public Double getFoodTaken() {
         return foodTaken;

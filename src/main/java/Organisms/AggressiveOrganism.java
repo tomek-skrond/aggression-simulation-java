@@ -1,9 +1,11 @@
 package Organisms;
 
+import Organisms.Abstractions.Organism;
+
 /**
  * Organizm o charakterze agresywnym - współczynnik agresji = 2
  **/
-public class AggressiveOrganism extends Organism{
+public class AggressiveOrganism extends Organism {
     /**
      * Konstruktor domyślny
      **/
@@ -20,4 +22,16 @@ public class AggressiveOrganism extends Organism{
         super(_reproductionRate,_hostility,_foodTaken,_isAlive);
     }
 
+    public AggressiveOrganism(AggressiveOrganism source){
+        super(source);
+        this.hostility = 2.0;
+    }
+    @Override
+    public Organism cloneObject(){
+        return new AggressiveOrganism(this);
+    }
+    @Override
+    public void objectInteraction(Organism o1){
+
+    }
 }
