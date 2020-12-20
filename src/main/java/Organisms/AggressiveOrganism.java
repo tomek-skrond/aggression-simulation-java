@@ -26,10 +26,16 @@ public class AggressiveOrganism extends Organism {
         super(source);
         this.hostility = 1.5;
     }
+
+    public Organism getObj(){
+        return new AggressiveOrganism();
+    }
+
     @Override
     public Organism cloneObject(){
         return new AggressiveOrganism(this);
     }
+
     @Override
     public void objectInteraction(Organism o1){
 

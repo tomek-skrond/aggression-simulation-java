@@ -29,6 +29,12 @@ public class DominantOrganism extends Organism {
         return new DominantOrganism(this);
     }
 
+
+
+    public Organism getObj(){
+        return new DominantOrganism();
+    }
+
     /**
      * Funkcja interakcji
      * @param o1

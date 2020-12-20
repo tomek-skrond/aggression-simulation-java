@@ -11,6 +11,12 @@ public class PassiveOrganism extends Organism {
         this.hostility = 0.5;
     }
 
+
+
+    public Organism getObj(){
+        return new PassiveOrganism();
+    }
+
     /**
      * Konstruktor dla Prototypów
      * @param source

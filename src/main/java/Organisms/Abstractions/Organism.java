@@ -3,11 +3,12 @@ package Organisms.Abstractions;
 
 import Organisms.Interfaces.CanInteract;
 import Organisms.Interfaces.ICloneable;
+import Organisms.Interfaces.OrganismInterface;
 
 /**
     Organism abstraction/klasa abstrakcyjna dla organizmów
  **/
-public abstract class Organism implements ICloneable, CanInteract {
+public abstract class Organism implements ICloneable, CanInteract, OrganismInterface {
 
 
     private Double reproductionRate;
@@ -56,6 +57,7 @@ public abstract class Organism implements ICloneable, CanInteract {
                 "is_alive: " + this.isAlive;
     }
 
+    public abstract Organism getObj();
 
     public Double getReproductionRate() {
         return reproductionRate;
@@ -69,7 +71,9 @@ public abstract class Organism implements ICloneable, CanInteract {
         return hostility;
     }
 
-    public void setHostility(Double hostility) { this.hostility = hostility; }
+    public void setHostility(Double hostility) {
+        this.hostility = hostility;
+    }
 
     public Double getFoodTaken() {
         return foodTaken;
@@ -86,5 +90,4 @@ public abstract class Organism implements ICloneable, CanInteract {
     public void setIsAlive(Double isAlive) {
         this.isAlive = isAlive;
     }
-
 }

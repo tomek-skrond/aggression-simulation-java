@@ -11,6 +11,11 @@ public class SubmissiveOrganism extends Organism {
         this.hostility = 0.5;
     }
 
+
+    public Organism getObj(){
+        return new SubmissiveOrganism();
+    }
+
     /**
      * Konstruktor
      * @param _reproductionRate
