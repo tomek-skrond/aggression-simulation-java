@@ -3,12 +3,12 @@ package StructureOrganisation;
 import Organisms.*;
 import Organisms.Abstractions.Organism;
 import Organisms.Enums.OrganismType;
-import StructureOrganisation.Interfaces.IRandomizable;
+import StructureOrganisation.Interfaces.IRandomizer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StructureOrganisationAgent implements IRandomizable {
+public class StructureOrganisationAgent implements IRandomizer {
 
 
     private List<Organism> organisms;
@@ -40,17 +40,46 @@ public class StructureOrganisationAgent implements IRandomizable {
         return new SubmissiveOrganism();
     }
     public List<Organism> generateOrganisms(int howMany, OrganismType type){
+
         List<Organism> l = new ArrayList<>();
+
         for(int i=0;i<howMany;i++){
             l.add(makeOrganismOfType(type));
         }
         return l;
     }
 
-    public List<Organism> groupIntoPairs(){
-        List<Organism> bufferArray = new ArrayList<>();
+    private boolean validateParity(){
+        if(this.organisms.size() % 2 == 0){
+            return true;
+        }
+        return false;
+    }
 
-        return  bufferArray;
+    private void backupOrganismSet(){
+        if(!validateParity()){
+
+            this.organisms.remove(
+                    generateRandomIntInRange(0,this.organisms.size())
+            );
+        }
+    }
+
+    public List<OrganismPair> groupIntoPairs(){
+
+        backupOrganismSet();
+
+        List<Organism> orgArray = this.organisms;
+        List<OrganismPair> pairBuffer = new ArrayList<>();
+
+        for (int i = 0; i< orgArray.size(); i++) {
+            pairBuffer.add(
+                    new OrganismPair(
+                            orgArray.get(i),orgArray.get(i+1)
+                    )
+            );
+        }
+        return pairBuffer;
     }
 
     public List<Double> assignFoodPackets(){

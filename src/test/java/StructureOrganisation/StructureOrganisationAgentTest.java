@@ -40,6 +40,9 @@ public class StructureOrganisationAgentTest extends TestCase {
     }
 
     public void testGroupIntoPairs() {
+        List<OrganismPair> pairs = structOrg.groupIntoPairs();
+
+        assert(pairs.size() % 2 == 0);
     }
 
     public void testAssignFoodPackets() {
