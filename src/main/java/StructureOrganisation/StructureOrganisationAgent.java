@@ -12,7 +12,7 @@ public class StructureOrganisationAgent implements IRandomizer {
 
 
     private List<Organism> organisms;
-    private List<OrganismPair> pairs = new ArrayList<>();
+    private List<OrganismPair> pairs;
     public List<Batch> batches = new ArrayList<>();
 
     public StructureOrganisationAgent(){
@@ -50,10 +50,7 @@ public class StructureOrganisationAgent implements IRandomizer {
     }
 
     private boolean validateParity(){
-        if(this.organisms.size() % 2 == 0){
-            return true;
-        }
-        return false;
+        return this.organisms.size() % 2 == 0;
     }
 
     private void backupOrganismSet(){
@@ -65,32 +62,30 @@ public class StructureOrganisationAgent implements IRandomizer {
         }
     }
 
-    public List<OrganismPair> groupIntoPairs(){
+    public List<OrganismPair> groupIntoPairs() {
 
         backupOrganismSet();
 
         List<Organism> orgArray = this.organisms;
         List<OrganismPair> pairBuffer = new ArrayList<>();
 
-        for (int i = 0; i< orgArray.size(); i++) {
+        for (int i = 0; i < orgArray.size(); i++) {
             pairBuffer.add(
                     new OrganismPair(
-                            orgArray.get(i),orgArray.get(i+1)
+                            orgArray.get(i), orgArray.get(i + 1)
                     )
             );
         }
         return pairBuffer;
     }
 
-    public List<Double> assignFoodPackets(){
-        List<Double> foodList = new ArrayList<>();
-
-        return foodList;
-    }
-
     public List<Batch> groupIntoBatches(){
         List<Batch> batchArr = new ArrayList<>();
-
+        for (var p : pairs) {
+            batchArr.add(
+                    new Batch(p, 2.0)
+            );
+        }
         return batchArr;
     }
 }

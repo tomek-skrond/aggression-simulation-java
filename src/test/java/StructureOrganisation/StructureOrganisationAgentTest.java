@@ -12,6 +12,7 @@ import static Organisms.Enums.OrganismType.*;
 public class StructureOrganisationAgentTest extends TestCase {
 
     StructureOrganisationAgent structOrg = new StructureOrganisationAgent();
+    List<Organism> checkList = createCheckList(5,A);
 
     public List<Organism> createCheckList(int N, OrganismType type){
         List<Organism> checkList = new ArrayList<>();
@@ -24,7 +25,7 @@ public class StructureOrganisationAgentTest extends TestCase {
     public void testGenerateOrganisms() {
 
         List<Organism> list = structOrg.generateOrganisms(5, A);
-        List<Organism> checkList = createCheckList(5,A);
+
 
         int i=0;
         for (var el : list) {
@@ -45,9 +46,17 @@ public class StructureOrganisationAgentTest extends TestCase {
         assert(pairs.size() % 2 == 0);
     }
 
-    public void testAssignFoodPackets() {
-    }
-
     public void testGroupIntoBatches() {
+        List<Batch> batches = structOrg.groupIntoBatches();
+
+        int b_size = batches.size();
+        assert(b_size % 2 == 0);
+
+        for (Batch batch : batches) {
+            assert (batch.foodPacket == 2.0);
+            assert (batch.pair.first.getHostility() == 1.5);
+            assert (batch.pair.second.getHostility() == 1.5);
+        }
+
     }
 }
