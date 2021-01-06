@@ -8,7 +8,7 @@ import Organisms.Abstractions.Organism;
 public class PassiveOrganism extends Organism {
     public PassiveOrganism(){
         super();
-        this.hostility = 0.5;
+        this.hostility = 1.0;
     }
 
 

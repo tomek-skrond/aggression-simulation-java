@@ -13,12 +13,12 @@ public class StructureOrganisationAgent implements IRandomizer {
 
     private List<Organism> organisms;
     private List<OrganismPair> pairs;
-    public List<Batch> batches = new ArrayList<>();
+    public List<Batch> batches;
 
     public StructureOrganisationAgent(){
         this.organisms = new ArrayList<>();
         this.pairs = new ArrayList<>();
-        this.pairs = new ArrayList<>();
+        this.batches = new ArrayList<>();
     }
 
     public Organism makeOrganismOfType(OrganismType type){

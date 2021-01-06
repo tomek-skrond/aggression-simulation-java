@@ -12,7 +12,6 @@ import static Organisms.Enums.OrganismType.*;
 public class StructureOrganisationAgentTest extends TestCase {
 
     StructureOrganisationAgent structOrg = new StructureOrganisationAgent();
-    List<Organism> checkList = createCheckList(5,A);
 
     public List<Organism> createCheckList(int N, OrganismType type){
         List<Organism> checkList = new ArrayList<>();

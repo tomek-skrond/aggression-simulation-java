@@ -22,6 +22,10 @@ public class AggressiveOrganism extends Organism {
         super(_reproductionRate,_hostility,_foodTaken,_isAlive);
     }
 
+    /**
+     * Konstruktor umożliwiający funkcję klonowania
+     * @param source
+     */
     public AggressiveOrganism(AggressiveOrganism source){
         super(source);
         this.hostility = 1.5;
@@ -38,6 +42,17 @@ public class AggressiveOrganism extends Organism {
 
     @Override
     public void objectInteraction(Organism o1){
+        if(o1.getHostility() == 2.0){
 
+        }
+        if(o1.getHostility() == 1.5){
+
+        }
+        if(o1.getHostility() == 1.0){
+
+        }
+        if(o1.getHostility() == 0.5){
+
+        }
     }
 }
