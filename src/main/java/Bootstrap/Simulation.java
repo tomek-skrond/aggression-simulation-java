@@ -10,6 +10,5 @@ public class Simulation {
 
     public Simulation(){
         System.out.println("konstruktor bootstrap");
-
     }
 }

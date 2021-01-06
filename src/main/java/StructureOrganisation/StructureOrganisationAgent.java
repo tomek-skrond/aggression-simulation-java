@@ -81,7 +81,7 @@ public class StructureOrganisationAgent implements IRandomizer {
 
     public List<Batch> groupIntoBatches(){
         List<Batch> batchArr = new ArrayList<>();
-        for (var p : pairs) {
+        for (OrganismPair p : pairs) {
             batchArr.add(
                     new Batch(p, 2.0)
             );

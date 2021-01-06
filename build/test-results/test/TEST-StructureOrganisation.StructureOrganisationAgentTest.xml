@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="StructureOrganisation.StructureOrganisationAgentTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-01-06T22:11:44" hostname="NH5-NH7" time="0.004">
+  <properties/>
+  <testcase name="testGenerateOrganisms" classname="StructureOrganisation.StructureOrganisationAgentTest" time="0.003"/>
+  <testcase name="testGroupIntoPairs" classname="StructureOrganisation.StructureOrganisationAgentTest" time="0.0"/>
+  <testcase name="testGroupIntoBatches" classname="StructureOrganisation.StructureOrganisationAgentTest" time="0.0"/>
+  <system-out><![CDATA[hostility: 1.5
+hostility: 1.5
+hostility: 1.5
+hostility: 1.5
+hostility: 1.5
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

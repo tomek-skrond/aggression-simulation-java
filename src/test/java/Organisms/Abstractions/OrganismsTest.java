@@ -13,19 +13,19 @@ public class OrganismsTest extends TestCase {
 
     }
 
-    void testAggressive(){
+    public void testAggressive(){
 
     }
 
-    void testDominant(){
+    public void testDominant(){
         assert(true);
     }
 
-    void testSubmissive(){
+    public void testSubmissive(){
         assert(true);
     }
 
-    void testPassive(){
+    public void testPassive(){
         assert(true);
     }
 }

@@ -27,7 +27,7 @@ public class StructureOrganisationAgentTest extends TestCase {
 
 
         int i=0;
-        for (var el : list) {
+        for (Organism el : list) {
 
             System.out.println("hostility: " + el.getHostility());
             assert(
