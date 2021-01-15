@@ -1,10 +1,10 @@
 package Main;
-//import Bootstrap.Simulation;
+import Bootstrap.Simulation;
 
 public class Main {
     public static void main(String [] args){
 
-        //Simulation b = new Simulation();
+        Simulation b = new Simulation();
 
     }
 }

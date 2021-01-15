@@ -21,7 +21,7 @@ public class StructureOrganisationAgent implements IRandomizer {
         this.batches = new ArrayList<>();
     }
 
-    public Organism makeOrganismOfType(OrganismType type){
+    Organism makeOrganismOfType(OrganismType type){
 
         switch(type){
             case A:
@@ -39,7 +39,7 @@ public class StructureOrganisationAgent implements IRandomizer {
         }
         return new SubmissiveOrganism();
     }
-    public List<Organism> generateOrganisms(int howMany, OrganismType type){
+    List<Organism> generateOrganisms(int howMany, OrganismType type){
 
         List<Organism> l = new ArrayList<>();
 
@@ -53,16 +53,16 @@ public class StructureOrganisationAgent implements IRandomizer {
         return this.organisms.size() % 2 == 0;
     }
 
-    private void backupOrganismSet(){
+    void backupOrganismSet(){
         if(!validateParity()){
 
             this.organisms.remove(
-                    generateRandomIntInRange(0,this.organisms.size())
+                    generateRandomNumberInRange(0,this.organisms.size())
             );
         }
     }
 
-    public List<OrganismPair> groupIntoPairs() {
+    List<OrganismPair> groupIntoPairs() {
 
         backupOrganismSet();
 
@@ -79,7 +79,7 @@ public class StructureOrganisationAgent implements IRandomizer {
         return pairBuffer;
     }
 
-    public List<Batch> groupIntoBatches(){
+    List<Batch> groupIntoBatches(){
         List<Batch> batchArr = new ArrayList<>();
         for (OrganismPair p : pairs) {
             batchArr.add(
@@ -88,4 +88,5 @@ public class StructureOrganisationAgent implements IRandomizer {
         }
         return batchArr;
     }
+
 }
