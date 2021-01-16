@@ -1,6 +1,7 @@
 package StructureOrganisation;
 
 import Organisms.Abstractions.Organism;
+import Organisms.SubmissiveOrganism;
 import StructureOrganisation.Interfaces.IPairable;
 
 public class OrganismPair implements IPairable {
@@ -8,8 +9,8 @@ public class OrganismPair implements IPairable {
     Organism second;
 
     public OrganismPair(){
-        this.first = null;
-        this.second = null;
+        this.first = new SubmissiveOrganism();
+        this.second = new SubmissiveOrganism();
     }
     public OrganismPair(Organism _first, Organism _second){
         this.first = _first;
@@ -23,5 +24,12 @@ public class OrganismPair implements IPairable {
     @Override
     public void setSecond(Organism o){
         this.second = o;
+    }
+
+    @Override
+    public String toString(){
+
+        return "Pair(\n" + first.toString() + "\n" +
+                second.toString() + "\n)" + "\n";
     }
 }

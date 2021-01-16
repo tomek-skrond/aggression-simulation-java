@@ -17,18 +17,24 @@ public class Simulation implements IRandomizer {
     private final int submissive;
     private final int aggressive;
     private final int dominant;
+
     private int howManyCycles;
-    private StructureOrganisationAgent structOrg = new StructureOrganisationAgent();
+    private StructureOrganisationAgent structOrg;
     private ResultToFileHandler resultHandler = new ResultToFileHandler();
     private InteractionAgent interactions; //assign when all structures are organised(put in batches)
 
 
     public Simulation(int _passive,int _submissive,int _aggressive,int _dominant,int _howManyCycles){
+
+        int [] paramsList = {_passive,_submissive,_aggressive,_dominant};
+
         this.passive = _passive;
         this.submissive = _submissive;
         this.aggressive = _aggressive;
         this.dominant = _dominant;
         this.howManyCycles = _howManyCycles;
+
+        this.structOrg = new StructureOrganisationAgent(paramsList);
     }
     public Simulation(){
         int[] randomInts = generateRandomIntArray(4, 3, 50);
@@ -40,18 +46,14 @@ public class Simulation implements IRandomizer {
         this.howManyCycles = generateRandomNumberInRange(5,15);
     }
 
-    private void initSimulation(){
-
-    }
-
-    private void initSimulation(int howManyCycles){
-
-    }
-
-    private void simulationMainLoop(boolean isCustom){
+    private void simulationMainLoop(){
         int cycleCounter = 0;
+        structOrg.constructData();
         while(this.howManyCycles == cycleCounter){
 
+            //interactions.fightForFood();
+            //interactions.evaluateBatches();
+            cycleCounter++;
         }
     }
 

@@ -6,7 +6,11 @@ import Organisms.Enums.OrganismType;
 import StructureOrganisation.Interfaces.IRandomizer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Arrays.*;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StructureOrganisationAgent implements IRandomizer {
 
@@ -14,39 +18,54 @@ public class StructureOrganisationAgent implements IRandomizer {
     private List<Organism> organisms;
     private List<OrganismPair> pairs;
     public List<Batch> batches;
+    private int [] paramsList;
 
-    public StructureOrganisationAgent(){
+    public StructureOrganisationAgent(int [] orgParamsList){
         this.organisms = new ArrayList<>();
         this.pairs = new ArrayList<>();
         this.batches = new ArrayList<>();
+        this.paramsList = orgParamsList;
     }
 
-    Organism makeOrganismOfType(OrganismType type){
+    List<Organism> makeOrganismsOfType(OrganismType type, int howMany){
+        List<Organism> buff = new ArrayList<>();
 
-        switch(type){
-            case A:
-                return new AggressiveOrganism();
+        for (int i = 0; i < howMany; i++) {
+            switch(type){
+                case A:
+                    buff.add(new AggressiveOrganism());
+                    break;
 
-            case D:
-                return new DominantOrganism();
-
-            case P:
-                return new PassiveOrganism();
-
-            case S:
-                return new SubmissiveOrganism();
-
+                case D:
+                    buff.add(new DominantOrganism());
+                    break;
+                case P:
+                    buff.add(new PassiveOrganism());
+                    break;
+                case S:
+                    buff.add(new SubmissiveOrganism());
+                    break;
+            }
         }
-        return new SubmissiveOrganism();
+        return buff;
+
     }
-    List<Organism> generateOrganisms(int howMany, OrganismType type){
+    StructureOrganisationAgent generateOrganisms(){
 
-        List<Organism> l = new ArrayList<>();
+        List<List<Organism>> l = new ArrayList<>();
 
-        for(int i=0;i<howMany;i++){
-            l.add(makeOrganismOfType(type));
+        int i = 0;
+        for(OrganismType type : OrganismType.values()){
+            //this.organisms.add((Organism) makeOrganismsOfType(type,i));
+            l.add(makeOrganismsOfType(type,paramsList[i]));
+            i++;
         }
-        return l;
+
+        this.organisms = l.stream()
+                          .flatMap(x->x.stream())
+                          .collect(Collectors.toList());
+
+        return this;
     }
 
     private boolean validateParity(){
@@ -62,31 +81,81 @@ public class StructureOrganisationAgent implements IRandomizer {
         }
     }
 
-    List<OrganismPair> groupIntoPairs() {
+   StructureOrganisationAgent groupIntoPairs() {
 
-        backupOrganismSet();
+        this.backupOrganismSet();
 
-        List<Organism> orgArray = this.organisms;
-        List<OrganismPair> pairBuffer = new ArrayList<>();
 
-        for (int i = 0; i < orgArray.size(); i++) {
-            pairBuffer.add(
-                    new OrganismPair(
-                            orgArray.get(i), orgArray.get(i + 1)
-                    )
+        for (int i = 0; i < this.organisms.size()/2; i++) {
+
+            this.pairs.add(
+                    new OrganismPair()
             );
         }
-        return pairBuffer;
+
+       //this.pairs.get(i).setFirst(this.organisms.get(i+j));
+       //this.pairs.get(i).setSecond(this.organisms.get(i+j));
+
+
+        List<Organism> org = organisms;
+        Organism[] orgArr = new Organism[organisms.size()];
+        org.toArray(orgArr);
+
+        Organism[][] resultArr = new Organism[organisms.size()/2][];
+
+        int counter = 0;
+
+        for (int i = 0; i < organisms.size(); i+=2) {
+           resultArr[counter] = Arrays.copyOf(
+                   getSlice(orgArr,i,i+2),resultArr.length+2
+           );
+           this.pairs.get(counter).setFirst(resultArr[counter][0]);
+           this.pairs.get(counter).setSecond(resultArr[counter][1]);
+
+           counter++;
+        }
+
+       return this;
+    }
+    private Organism[] getSlice(Organism[] arr,int startIndex,int endIndex){
+        return Arrays.copyOfRange(arr,startIndex,endIndex);
     }
 
-    List<Batch> groupIntoBatches(){
-        List<Batch> batchArr = new ArrayList<>();
+    StructureOrganisationAgent groupIntoBatches(){
+
         for (OrganismPair p : pairs) {
-            batchArr.add(
+            this.batches.add(
                     new Batch(p, 2.0)
             );
         }
-        return batchArr;
+        return this;
     }
 
+    public void constructData(){
+        this.generateOrganisms()
+                .shuffle()
+                .groupIntoPairs()
+                .groupIntoBatches();
+    }
+
+    StructureOrganisationAgent shuffle(){
+        Collections.shuffle(this.organisms);
+        return this;
+    }
+
+    public ArrayList<OrganismPair> getPairs() {
+        return (ArrayList) pairs;
+    }
+
+    public ArrayList getOrganisms() {
+        return (ArrayList) organisms;
+    }
+
+    public ArrayList<Batch> getBatches() {
+        return (ArrayList) batches;
+    }
+
+    public int[] getParamsList() {
+        return paramsList;
+    }
 }

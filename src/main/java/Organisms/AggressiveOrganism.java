@@ -55,4 +55,9 @@ public class AggressiveOrganism extends Organism {
 
         }
     }
+
+    @Override
+    public String toString(){
+        return "Aggressive " + super.toString();
+    }
 }

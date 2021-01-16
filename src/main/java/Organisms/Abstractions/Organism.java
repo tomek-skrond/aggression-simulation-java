@@ -51,10 +51,10 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
 
     @Override
     public String toString(){
-        return "repr_rate: " + this.reproductionRate + "\n" +
-                "hostility: " + this.hostility + "\n" +
-                "food_taken: " + this.foodTaken + "\n" +
-                "is_alive: " + this.isAlive;
+        return "(r_r: " + this.reproductionRate + "," +
+                "host: " + this.hostility + "," +
+                "food: " + this.foodTaken + "," +
+                "alive: " + this.isAlive + ")";
     }
 
     public abstract Organism getObj();

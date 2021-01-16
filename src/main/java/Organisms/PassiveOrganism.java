@@ -43,4 +43,8 @@ public class PassiveOrganism extends Organism {
     public void objectInteraction(Organism o1){
 
     }
+    @Override
+    public String toString(){
+        return "Passive " + super.toString();
+    }
 }

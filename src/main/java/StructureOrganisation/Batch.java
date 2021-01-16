@@ -20,4 +20,9 @@ public class Batch implements IPairable{
     public void setSecond(Organism o){
         this.pair.setSecond(o);
     }
+    @Override
+    public String toString(){
+        return "Batch (" + pair.first.toString() + "\n\t" +
+                            pair.second.toString() + ")";
+    }
 }

@@ -1,7 +1,9 @@
 package StructureOrganisation;
 
 import Organisms.Abstractions.Organism;
+import Organisms.AggressiveOrganism;
 import Organisms.Enums.OrganismType;
+import StructureOrganisation.Interfaces.IRandomizer;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -11,51 +13,88 @@ import static Organisms.Enums.OrganismType.*;
 
 public class StructureOrganisationAgentTest extends TestCase {
 
-    StructureOrganisationAgent structOrg = new StructureOrganisationAgent();
+    int [] paramsList = {2,2,2,2};
 
-    public List<Organism> createCheckList(int N, OrganismType type){
-        List<Organism> checkList = new ArrayList<>();
-        for (int i = 0; i < N; i++) {
-            checkList.add(structOrg.makeOrganismOfType(type));
+    StructureOrganisationAgent structOrg = new StructureOrganisationAgent(paramsList);
+
+    public void testMakeOrganismsOfType() {
+        List<Organism> list = structOrg.makeOrganismsOfType(A,4);
+
+        for(Organism o : list){
+            System.out.println(o);
         }
-        return checkList;
+
+        assert(list.size() == 4);
+        for (int i = 0; i < list.size(); i++) {
+            assert(list.get(i).getHostility() == 1.5);
+        }
+
+
     }
 
     public void testGenerateOrganisms() {
+        int [] paramsCheck = {0,0,0,0};
+        ArrayList<Organism> list = structOrg
+                .generateOrganisms()
+                .shuffle()
+                .getOrganisms();
 
-        List<Organism> list = structOrg.generateOrganisms(5, A);
+        //list = structOrg.getOrganisms();
 
 
-        int i=0;
-        for (Organism el : list) {
-
-            System.out.println("hostility: " + el.getHostility());
-            assert(
-                    list.get(i).getHostility() == 1.5
-            );
-
-            i++;
+        for(Organism o : list){
+            System.out.println(o);
+            if(o.getHostility() == 1.5){
+                paramsCheck[0]++;
+            }
+            if(o.getHostility() == 2.0){
+                paramsCheck[1]++;
+            }
+            if(o.getHostility() == 1.0){
+                paramsCheck[2]++;
+            }
+            if(o.getHostility() == 0.5){
+                paramsCheck[3]++;
+            }
         }
 
+        for (int i = 0; i < paramsCheck.length; i++) {
+            assert(paramsList[i] == paramsCheck[i]);
+        }
     }
 
     public void testGroupIntoPairs() {
-        List<OrganismPair> pairs = structOrg.groupIntoPairs();
 
-        assert(pairs.size() % 2 == 0);
-    }
+        ArrayList<OrganismPair> pairs = structOrg
+                                        .generateOrganisms()
+                                        .shuffle()
+                                        .groupIntoPairs()
+                                        .getPairs();
 
-    public void testGroupIntoBatches() {
-        List<Batch> batches = structOrg.groupIntoBatches();
+        System.out.println(pairs.size());
 
-        int b_size = batches.size();
-        assert(b_size % 2 == 0);
-
-        for (Batch batch : batches) {
-            assert (batch.foodPacket == 2.0);
-            assert (batch.pair.first.getHostility() == 1.5);
-            assert (batch.pair.second.getHostility() == 1.5);
+        for(Object o : structOrg.getOrganisms()){
+            System.out.println(o);
         }
 
+        assert(structOrg.getOrganisms().size() % 2 == 0);
+
+        for(OrganismPair p : pairs){
+            System.out.println(p);
+        }
+
+
     }
+
+    /*
+    public void testGroupIntoBatches() {
+        ArrayList<Batch> batches = structOrg
+                                   .groupIntoBatches()
+                                   .getBatches();
+        for(Batch b : batches){
+            System.out.println(b.toString());
+        }
+    }
+*/
 }
+

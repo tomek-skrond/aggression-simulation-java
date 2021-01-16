@@ -43,4 +43,9 @@ public class DominantOrganism extends Organism {
     public void objectInteraction(Organism o1){
 
     }
+
+    @Override
+    public String toString(){
+        return "Dominant " + super.toString();
+    }
 }

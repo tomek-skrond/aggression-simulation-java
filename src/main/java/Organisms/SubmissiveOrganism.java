@@ -49,4 +49,9 @@ public class SubmissiveOrganism extends Organism {
     public void objectInteraction(Organism o1){
 
     }
+
+    @Override
+    public String toString(){
+        return "Submissive " + super.toString();
+    }
 }
