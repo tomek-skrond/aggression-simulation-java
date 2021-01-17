@@ -7,9 +7,19 @@ public class Batch implements IPairable{
     OrganismPair pair;
     Double foodPacket;
 
+
+
     public Batch(OrganismPair _pair, Double _foodPacket){
         this.pair = _pair;
         this.foodPacket = _foodPacket;
+    }
+
+    public OrganismPair getPair() {
+        return pair;
+    }
+
+    public double getFoodPacket() {
+        return foodPacket;
     }
 
     @Override
@@ -22,7 +32,7 @@ public class Batch implements IPairable{
     }
     @Override
     public String toString(){
-        return "Batch (" + pair.first.toString() + "\n\t" +
-                            pair.second.toString() + ")";
+        return "Batch (\n" + pair.first.toString() + "\n" +
+                            pair.second.toString() + ",\nfood(before fight): " + this.foodPacket + "\n)";
     }
 }

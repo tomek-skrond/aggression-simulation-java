@@ -1,9 +1,6 @@
 package StructureOrganisation;
 
 import Organisms.Abstractions.Organism;
-import Organisms.AggressiveOrganism;
-import Organisms.Enums.OrganismType;
-import StructureOrganisation.Interfaces.IRandomizer;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -13,7 +10,7 @@ import static Organisms.Enums.OrganismType.*;
 
 public class StructureOrganisationAgentTest extends TestCase {
 
-    int [] paramsList = {2,2,2,2};
+    int [] paramsList = {1,1,1,1};
 
     StructureOrganisationAgent structOrg = new StructureOrganisationAgent(paramsList);
 
@@ -71,7 +68,7 @@ public class StructureOrganisationAgentTest extends TestCase {
                                         .groupIntoPairs()
                                         .getPairs();
 
-        System.out.println(pairs.size());
+
 
         for(Object o : structOrg.getOrganisms()){
             System.out.println(o);
@@ -79,22 +76,58 @@ public class StructureOrganisationAgentTest extends TestCase {
 
         assert(structOrg.getOrganisms().size() % 2 == 0);
 
+        System.out.println("liczba par: " + pairs.size() + "\n");
+
+        int i = 0;
         for(OrganismPair p : pairs){
             System.out.println(p);
+            assert(p.first == pairs.get(i).first);
+            assert(p.second == pairs.get(i).second);
+            i++;
         }
-
 
     }
 
-    /*
+
     public void testGroupIntoBatches() {
         ArrayList<Batch> batches = structOrg
-                                   .groupIntoBatches()
-                                   .getBatches();
+                .generateOrganisms()
+                .shuffle()
+                .groupIntoPairs()
+                .groupIntoBatches()
+                .getBatches();
+
+        ArrayList<OrganismPair> pairs = structOrg.getPairs();
+        ArrayList<Organism> organisms = structOrg.getOrganisms();
+
+        for(Organism o : organisms){
+            System.out.println(o);
+        }
+
+        int i = 0;
+        for(OrganismPair p : pairs){
+            assert(p.first == pairs.get(i).first);
+            assert(p.second == pairs.get(i).second);
+            i++;
+        }
+        i=0;
         for(Batch b : batches){
-            System.out.println(b.toString());
+            System.out.println(b);
+            assert(b.pair.first == pairs.get(i).first && b.foodPacket == 2.0);
+            assert(b.pair.second== pairs.get(i).second);
+            i++;
         }
     }
-*/
+
+    public void testConstructData() {
+
+    }
+
+    public void testInitializeData() {
+        structOrg.initializeData();
+        for(Batch b : structOrg.getBatches()){
+            System.out.println(b);
+        }
+    }
 }
 

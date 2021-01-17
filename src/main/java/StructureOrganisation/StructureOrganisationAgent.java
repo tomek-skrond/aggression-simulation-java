@@ -7,12 +7,13 @@ import StructureOrganisation.Interfaces.IRandomizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Arrays.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class StructureOrganisationAgent implements IRandomizer {
+
+
 
 
     private List<Organism> organisms;
@@ -76,7 +77,7 @@ public class StructureOrganisationAgent implements IRandomizer {
         if(!validateParity()){
 
             this.organisms.remove(
-                    generateRandomNumberInRange(0,this.organisms.size())
+                    generateRandomNumberInRange(0,this.organisms.size()-1)
             );
         }
     }
@@ -97,7 +98,7 @@ public class StructureOrganisationAgent implements IRandomizer {
        //this.pairs.get(i).setSecond(this.organisms.get(i+j));
 
 
-        List<Organism> org = organisms;
+        List<Organism> org = this.organisms;
         Organism[] orgArr = new Organism[organisms.size()];
         org.toArray(orgArr);
 
@@ -123,7 +124,7 @@ public class StructureOrganisationAgent implements IRandomizer {
 
     StructureOrganisationAgent groupIntoBatches(){
 
-        for (OrganismPair p : pairs) {
+        for (OrganismPair p : this.pairs) {
             this.batches.add(
                     new Batch(p, 2.0)
             );
@@ -131,11 +132,44 @@ public class StructureOrganisationAgent implements IRandomizer {
         return this;
     }
 
-    public void constructData(){
+    public void initializeData(){
         this.generateOrganisms()
                 .shuffle()
                 .groupIntoPairs()
                 .groupIntoBatches();
+    }
+
+    public void constructData(ArrayList<Organism> organisms){
+        this.organisms = organisms;
+        this.pairs = new ArrayList<>();
+        this.batches = new ArrayList<>();
+
+        this.shuffle()
+                .groupIntoPairs()
+                .groupIntoBatches();
+    }
+
+    public ArrayList<Organism> gatherCycleOutput(){
+        ArrayList<Batch> inputBatches = this.getBatches();
+        List<Organism> buff = new ArrayList<>();
+
+        for(Batch b : inputBatches){
+            if(b.getPair().first.getFoodTaken() == 0.0) {
+                inputBatches.remove(b.pair.first);
+            }
+            else if(b.getPair().second.getFoodTaken() == 0.0){
+                inputBatches.remove(b.pair.second);
+            }
+            else if(b.getPair().first != null){
+                buff.add(b.getPair().first);
+
+            }
+            else if(b.getPair().second != null){
+                buff.add(b.getPair().second);
+            }
+        }
+        this.organisms = buff;
+        return (ArrayList) buff;
     }
 
     StructureOrganisationAgent shuffle(){
@@ -144,18 +178,22 @@ public class StructureOrganisationAgent implements IRandomizer {
     }
 
     public ArrayList<OrganismPair> getPairs() {
-        return (ArrayList) pairs;
+        return (ArrayList) this.pairs;
     }
 
-    public ArrayList getOrganisms() {
-        return (ArrayList) organisms;
+    public ArrayList<Organism> getOrganisms() {
+        return (ArrayList) this.organisms;
     }
 
     public ArrayList<Batch> getBatches() {
-        return (ArrayList) batches;
+        return (ArrayList) this.batches;
     }
 
     public int[] getParamsList() {
         return paramsList;
+    }
+
+    public void setOrganisms(List<Organism> organisms) {
+        this.organisms = organisms;
     }
 }

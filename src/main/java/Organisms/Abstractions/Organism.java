@@ -33,8 +33,8 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
      * @param _foodTaken -- jedzenie, które udało się zdobyć przez organizm w iteracji
      * @param _isAlive -- określa prawdopodobieństwo przeżycia organizmu w następnym cyklu
      */
-    public Organism(Double _reproductionRate,Double _hostility,
-                    Double _foodTaken,Double _isAlive){
+    public Organism(double _reproductionRate, double _hostility,
+                    double _foodTaken, double _isAlive){
         this.reproductionRate = _reproductionRate;
         this.hostility = _hostility;
         this.foodTaken = _foodTaken;
@@ -59,7 +59,7 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
 
     public abstract Organism getObj();
 
-    public Double getReproductionRate() {
+    public double getReproductionRate() {
         return reproductionRate;
     }
 
@@ -67,7 +67,7 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         this.reproductionRate = reproductionRate;
     }
 
-    public Double getHostility() {
+    public double getHostility() {
         return hostility;
     }
 
@@ -75,7 +75,7 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         this.hostility = hostility;
     }
 
-    public Double getFoodTaken() {
+    public double getFoodTaken() {
         return foodTaken;
     }
 
@@ -83,7 +83,7 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         this.foodTaken = foodTaken;
     }
 
-    public Double getIsAlive() {
+    public double getIsAlive() {
         return isAlive;
     }
 

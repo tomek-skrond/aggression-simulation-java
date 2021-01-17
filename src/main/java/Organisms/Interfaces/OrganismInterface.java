@@ -1,21 +1,19 @@
 package Organisms.Interfaces;
 
-import Organisms.Abstractions.Organism;
-
 public interface OrganismInterface {
-    Double getReproductionRate();
+    double getReproductionRate();
 
     void setReproductionRate(Double reproductionRate);
 
-    Double getHostility();
+    double getHostility();
 
     void setHostility(Double hostility);
 
-    Double getFoodTaken();
+    double getFoodTaken();
 
     void setFoodTaken(Double foodTaken);
 
-    Double getIsAlive();
+    double getIsAlive();
 
     void setIsAlive(Double isAlive);
 

@@ -2,13 +2,9 @@ package Bootstrap;
 
 import Interactions.InteractionAgent;
 import ResultToFiles.ResultToFileHandler;
+import StructureOrganisation.Batch;
 import StructureOrganisation.Interfaces.IRandomizer;
 import StructureOrganisation.StructureOrganisationAgent;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Consumer;
 
 
 public class Simulation implements IRandomizer {
@@ -19,7 +15,7 @@ public class Simulation implements IRandomizer {
     private final int dominant;
 
     private int howManyCycles;
-    private StructureOrganisationAgent structOrg;
+    StructureOrganisationAgent structOrg;
     private ResultToFileHandler resultHandler = new ResultToFileHandler();
     private InteractionAgent interactions; //assign when all structures are organised(put in batches)
 
@@ -44,15 +40,38 @@ public class Simulation implements IRandomizer {
         this.aggressive = randomInts[2];
         this.dominant = randomInts[3];
         this.howManyCycles = generateRandomNumberInRange(5,15);
+
+        this.structOrg = new StructureOrganisationAgent(randomInts);
     }
 
-    private void simulationMainLoop(){
-        int cycleCounter = 0;
-        structOrg.constructData();
-        while(this.howManyCycles == cycleCounter){
+     void simulationMainLoop(){
+        int cycleCounter = 1;
 
+        structOrg.initializeData();
+        while(this.howManyCycles != cycleCounter){
+
+            structOrg.constructData(structOrg.getOrganisms());
             //interactions.fightForFood();
             //interactions.evaluateBatches();
+
+            /*
+            for(Batch b : structOrg.getBatches()){
+                System.out.println(b);
+            }*/
+
+            System.out.println("------------------------------");
+            for(Batch b : structOrg.getBatches()){
+                System.out.println(b);
+            }
+
+            structOrg.setOrganisms(
+                    structOrg.gatherCycleOutput()
+            );
+
+            System.out.println("------------------------------");
+            for(Batch b : structOrg.getBatches()){
+                System.out.println(b);
+            }
             cycleCounter++;
         }
     }
