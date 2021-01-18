@@ -21,5 +21,12 @@ public class InteractionAgent {
         }
     }
 
+    public List<Batch> getBatches() {
+        return batches;
+    }
+
+    public void setBatches(List<Batch> batches) {
+        this.batches = batches;
+    }
 
 }

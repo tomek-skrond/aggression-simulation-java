@@ -1,6 +1,7 @@
 package StructureOrganisation;
 
 import Organisms.Abstractions.Organism;
+import Organisms.Empty;
 import Organisms.SubmissiveOrganism;
 import StructureOrganisation.Interfaces.IPairable;
 
@@ -9,8 +10,8 @@ public class OrganismPair implements IPairable {
     Organism second;
 
     public OrganismPair(){
-        this.first = new SubmissiveOrganism();
-        this.second = new SubmissiveOrganism();
+        this.first = new Empty();
+        this.second = new Empty();
     }
     public OrganismPair(Organism _first, Organism _second){
         this.first = _first;

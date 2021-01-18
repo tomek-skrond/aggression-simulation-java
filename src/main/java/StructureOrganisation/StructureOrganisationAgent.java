@@ -118,6 +118,41 @@ public class StructureOrganisationAgent implements IRandomizer {
 
        return this;
     }
+
+    ArrayList<OrganismPair> updatePairs(List<Organism> orgs) {
+
+
+        //this.pairs.get(i).setFirst(this.organisms.get(i+j));
+        //this.pairs.get(i).setSecond(this.organisms.get(i+j));
+
+        List<OrganismPair> pairsBuff = new ArrayList<>();
+        Organism[] orgArr = new Organism[orgs.size()];
+        orgs.toArray(orgArr);
+
+        Organism[][] resultArr = new Organism[orgs.size()/2][];
+
+        int counter = 0;
+
+        for (int i = 0; i < orgs.size(); i+=2) {
+            resultArr[counter] = Arrays.copyOf(
+                    getSlice(orgArr,i,i+2),resultArr.length+2
+            );
+            //this.pairs.get(counter).setFirst(resultArr[counter][0]);
+            //this.pairs.get(counter).setSecond(resultArr[counter][1]);
+
+            counter++;
+        }
+        for(Organism[] r : resultArr){
+            List<Organism>l = new ArrayList<>(Arrays.asList(r));
+            pairsBuff.add(
+                    new OrganismPair(
+                            l.get(0),l.get(1)
+                    )
+            );
+        }
+
+        return (ArrayList<OrganismPair>) pairsBuff;
+    }
     private Organism[] getSlice(Organism[] arr,int startIndex,int endIndex){
         return Arrays.copyOfRange(arr,startIndex,endIndex);
     }
@@ -154,24 +189,53 @@ public class StructureOrganisationAgent implements IRandomizer {
         List<Organism> buff = new ArrayList<>();
 
 
-
         for(Batch b : inputBatches){
-            //System.out.println("sdfs" + b);
-            if(b.getPair().first.getFoodTaken() >= 1.0) {
-                b.getFirst().setIsAlive(1.0);
-                buff.add(b.getPair().first);
+            Organism first = b.getFirst();
+            Organism second = b.getSecond();
+
+            if(first.evaluateState()){
+                buff.add(first);
             }
-            if(b.getPair().second.getFoodTaken() >= 1.0){
-                b.getSecond().setIsAlive(1.0);
-                buff.add(b.getPair().second);
+            if(second.evaluateState()){
+                buff.add(second);
             }
         }
+
         this.organisms = buff;
-        buff.add(new AggressiveOrganism(1.0,1.0,1.0,1.0));
-        buff.add(new AggressiveOrganism(1.0,1.0,1.0,1.0));
-        return (ArrayList) buff;
+        this.pairs = this.updatePairs(buff);
+        this.batches = updateBatches(this.pairs);
+        return (ArrayList) this.organisms;
     }
 
+    private List<Batch> updateBatches(List<OrganismPair> pairbuffArr) {
+        List<Batch> batchBuffArr = new ArrayList<>();
+        for(OrganismPair p : pairbuffArr){
+            batchBuffArr.add(
+                    new Batch(p,2.0)
+            );
+        }
+        return batchBuffArr;
+    }
+
+    public int[] countOrganisms(){
+        int[] orgCounted = new int[4];
+
+        for (Organism o : this.organisms) {
+            if(o instanceof AggressiveOrganism){
+                orgCounted[0]++;
+            }
+            if(o instanceof DominantOrganism){
+                orgCounted[1]++;
+            }
+            if(o instanceof PassiveOrganism){
+                orgCounted[2]++;
+            }
+            if(o instanceof SubmissiveOrganism){
+                orgCounted[3]++;
+            }
+        }
+        return orgCounted;
+    }
     StructureOrganisationAgent shuffle(){
         Collections.shuffle(this.organisms);
         return this;
@@ -187,6 +251,14 @@ public class StructureOrganisationAgent implements IRandomizer {
 
     public ArrayList<Batch> getBatches() {
         return (ArrayList) this.batches;
+    }
+
+    public StructureOrganisationAgent setBatches(ArrayList<Batch> bArray){
+        this.batches = bArray;
+        return this;
+    }
+    public void setOrganisms(ArrayList<Organism> oArray){
+        this.organisms = oArray;
     }
 
     public int[] getParamsList() {

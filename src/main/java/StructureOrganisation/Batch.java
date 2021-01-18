@@ -41,6 +41,6 @@ public class Batch implements IPairable{
     @Override
     public String toString(){
         return "Batch (\n" + pair.first.toString() + "\n" +
-                            pair.second.toString() + ",\nfood(before fight): " + this.foodPacket + "\n)";
+                            pair.second.toString() + ",\nfood(fight): " + this.foodPacket + "\n)";
     }
 }

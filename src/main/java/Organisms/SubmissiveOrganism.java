@@ -9,15 +9,12 @@ public class SubmissiveOrganism extends Organism {
 
     int deadCounter = 0;
     boolean duplicateIndicator = false;
+    public static int submissiveCounter = 0;
 
     public SubmissiveOrganism(){
         super();
         this.hostility = 0.5;
-    }
-
-
-    public Organism getObj(){
-        return new SubmissiveOrganism();
+        submissiveCounter++;
     }
 
     /**
@@ -31,6 +28,7 @@ public class SubmissiveOrganism extends Organism {
                               Double _foodTaken, Double _isAlive){
         super(_reproductionRate,_hostility,_foodTaken,_isAlive);
         this.hostility = 0.5;
+        submissiveCounter++;
     }
 
     /**
@@ -40,6 +38,7 @@ public class SubmissiveOrganism extends Organism {
     public SubmissiveOrganism(SubmissiveOrganism source){
         super(source);
         this.hostility = 0.5;
+        submissiveCounter++;
     }
 
     /**
@@ -48,22 +47,23 @@ public class SubmissiveOrganism extends Organism {
      */
     @Override
     public Organism cloneObject(){
+        submissiveCounter++;
         return new SubmissiveOrganism(this);
     }
     @Override
     public void objectInteraction(Organism o1){
 
         if(o1.getHostility() == 2.0){
-            this.setFoodTaken(2.0);
-            o1.setFoodTaken(0.0);
+            this.setFoodTaken(0.0);
+            o1.setFoodTaken(2.0);
         }
         if(o1.getHostility() == 1.5){
-            this.setFoodTaken(2.0);
-            o1.setFoodTaken(0.0);
+            this.setFoodTaken(0.0);
+            o1.setFoodTaken(2.0);
         }
         if(o1.getHostility() == 1.0){
-            this.setFoodTaken(2.0);
-            o1.setFoodTaken(0.0);
+            this.setFoodTaken(1.0);
+            o1.setFoodTaken(1.0);
         }
         if(o1.getHostility() == 0.5){
             this.setFoodTaken(1.0);

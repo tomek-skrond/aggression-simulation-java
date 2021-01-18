@@ -6,20 +6,20 @@ import Organisms.Abstractions.Organism;
  *  * Organizm pasywny - współczynnik agresji = 1
  */
 public class PassiveOrganism extends Organism {
+
+    public static int passiveCounter = 0;
+
     public PassiveOrganism(){
         super();
         this.hostility = 1.0;
+        passiveCounter++;
     }
 
     public PassiveOrganism(double _reproductionRate, double _hostility,
                            double _foodTaken, double _isAlive){
-
         super();
         this.hostility = 1.0;
-    }
-
-    public Organism getObj(){
-        return new PassiveOrganism();
+        passiveCounter++;
     }
 
     /**
@@ -29,6 +29,7 @@ public class PassiveOrganism extends Organism {
     public PassiveOrganism(PassiveOrganism source){
         super(source);
         this.hostility = 0.5;
+        passiveCounter++;
     }
 
     /**
@@ -37,6 +38,7 @@ public class PassiveOrganism extends Organism {
      */
     @Override
     public Organism cloneObject(){
+        passiveCounter++;
         return new PassiveOrganism(this);
     }
 
@@ -63,6 +65,7 @@ public class PassiveOrganism extends Organism {
             o1.setFoodTaken(1.0);
         }
     }
+
     @Override
     public String toString(){
         return "Passive " + super.toString();

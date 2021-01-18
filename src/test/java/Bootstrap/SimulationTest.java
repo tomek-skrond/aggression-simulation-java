@@ -10,15 +10,14 @@ import java.util.ArrayList;
 public class SimulationTest extends TestCase {
 
 
-    Simulation sDef = new Simulation();
-    Simulation s = new Simulation(200,200,200,200,31);
-
-
+   //Simulation sDef = new Simulation();
+    Simulation s = new Simulation(30,100,20,6,300);
 
 
     public void testSimulationMainLoop() {
 
         int[] params = s.structOrg.getParamsList();
+
 
         for(int p : params){
             System.out.println(p);
@@ -27,7 +26,7 @@ public class SimulationTest extends TestCase {
         s.simulationMainLoop();
 
 
-        System.out.println(s.structOrg.batches.size());
+        //System.out.println(s.structOrg.batches.size());
 
     }
 }

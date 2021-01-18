@@ -1,6 +1,8 @@
 package Bootstrap;
 
 import Interactions.InteractionAgent;
+import Organisms.*;
+import Organisms.Abstractions.Organism;
 import ResultToFiles.ResultToFileHandler;
 import StructureOrganisation.Batch;
 import StructureOrganisation.Interfaces.IRandomizer;
@@ -52,10 +54,14 @@ public class Simulation implements IRandomizer {
         int cycleCounter = 0;
 
         structOrg.initializeData();
+
         while(this.howManyCycles != cycleCounter){
 
             structOrg.constructData(structOrg.getOrganisms());
+            this.setupInteractions();
             interactions.fightForFood();
+
+            //TODO:food to 0 after gatherCycleOutput
             //interactions.evaluateBatches();
 
             /*
@@ -67,13 +73,25 @@ public class Simulation implements IRandomizer {
                     structOrg.gatherCycleOutput()
             );
 
+            int[] orgCounted = structOrg.countOrganisms();
             System.out.println("------------------------------");
-            for(Batch b : structOrg.getBatches()){
+            /*for(Batch b : structOrg.getBatches()){
                 System.out.println(b);
-            }
-            System.out.println(structOrg.getBatches().size());
+            }*/
+            System.out.println("cycle number: " + cycleCounter);
+            System.out.println(
+                    " A: " + orgCounted[0] + "\n" +
+                    " D: " + orgCounted[1] + "\n" +
+                    " P: " + orgCounted[2] + "\n" +
+                    " S: " + orgCounted[3] + "\n" +
+                    " O: " + (Organism.organismCounter - Empty.emptyCounter) + "\n"
+            );
+            System.out.println("size of batches: " + structOrg.getBatches().size());
             cycleCounter++;
         }
     }
 
+    void setupInteractions(){
+        interactions = new InteractionAgent(this.structOrg.getBatches());
+    }
 }

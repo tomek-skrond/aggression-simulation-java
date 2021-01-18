@@ -15,6 +15,7 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
     protected Double hostility;
     private Double foodTaken;
     protected Double isAlive;
+    public static int organismCounter = 0;
 
     /**
         Default constructor/Konstruktor domyślny
@@ -24,6 +25,7 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         this.hostility = 0.0;
         this.foodTaken = 0.0;
         this.isAlive = 1.0;
+        organismCounter++;
     }
 
     /**
@@ -39,6 +41,8 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         this.hostility = _hostility;
         this.foodTaken = _foodTaken;
         this.isAlive = _isAlive;
+        organismCounter++;
+
     }
 
     public Organism(Organism source){
@@ -47,6 +51,7 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         this.hostility = source.hostility;
         this.reproductionRate = source.reproductionRate;
         this.isAlive = source.isAlive;
+        organismCounter++;
     }
 
     @Override
@@ -57,7 +62,16 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
                 "alive: " + this.isAlive + ")";
     }
 
-    public abstract Organism getObj();
+    public boolean evaluateState(){
+        if(this.getFoodTaken() >= 1.0){
+            this.setIsAlive(1.0);
+            return true;
+        }
+        else{
+            setIsAlive(0.0);
+            return false;
+        }
+    }
 
     public double getReproductionRate() {
         return reproductionRate;

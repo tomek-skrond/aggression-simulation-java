@@ -9,9 +9,12 @@ public class AggressiveOrganism extends Organism {
     /**
      * Konstruktor domyślny
      **/
+    public static int aggressiveCounter = 0;
+
     public AggressiveOrganism(){
         super();
         this.hostility = 1.5;
+        aggressiveCounter++;
     }
 
     /**
@@ -20,6 +23,7 @@ public class AggressiveOrganism extends Organism {
     public AggressiveOrganism(double _reproductionRate,double _hostility,
                               double _foodTaken,double _isAlive){
         super(_reproductionRate,_hostility,_foodTaken,_isAlive);
+        aggressiveCounter++;
     }
 
     /**
@@ -29,21 +33,19 @@ public class AggressiveOrganism extends Organism {
     public AggressiveOrganism(AggressiveOrganism source){
         super(source);
         this.hostility = 1.5;
-    }
-
-    public Organism getObj(){
-        return new AggressiveOrganism();
+        aggressiveCounter++;
     }
 
     @Override
     public Organism cloneObject(){
+        aggressiveCounter++;
         return new AggressiveOrganism(this);
     }
 
     @Override
     public void objectInteraction(Organism o1){
         if(o1.getHostility() == 2.0){
-            this.setFoodTaken(1.5);
+            this.setFoodTaken(0.5);
             o1.setFoodTaken(0.5);
         }
         if(o1.getHostility() == 1.5){
