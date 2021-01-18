@@ -31,6 +31,14 @@ public class Batch implements IPairable{
         this.pair.setSecond(o);
     }
     @Override
+    public Organism getFirst(){
+        return this.pair.first;
+    }
+    @Override
+    public Organism getSecond(){
+        return this.pair.second;
+    }
+    @Override
     public String toString(){
         return "Batch (\n" + pair.first.toString() + "\n" +
                             pair.second.toString() + ",\nfood(before fight): " + this.foodPacket + "\n)";

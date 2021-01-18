@@ -153,22 +153,22 @@ public class StructureOrganisationAgent implements IRandomizer {
         ArrayList<Batch> inputBatches = this.getBatches();
         List<Organism> buff = new ArrayList<>();
 
-        for(Batch b : inputBatches){
-            if(b.getPair().first.getFoodTaken() == 0.0) {
-                inputBatches.remove(b.pair.first);
-            }
-            else if(b.getPair().second.getFoodTaken() == 0.0){
-                inputBatches.remove(b.pair.second);
-            }
-            else if(b.getPair().first != null){
-                buff.add(b.getPair().first);
 
+
+        for(Batch b : inputBatches){
+            //System.out.println("sdfs" + b);
+            if(b.getPair().first.getFoodTaken() >= 1.0) {
+                b.getFirst().setIsAlive(1.0);
+                buff.add(b.getPair().first);
             }
-            else if(b.getPair().second != null){
+            if(b.getPair().second.getFoodTaken() >= 1.0){
+                b.getSecond().setIsAlive(1.0);
                 buff.add(b.getPair().second);
             }
         }
         this.organisms = buff;
+        buff.add(new AggressiveOrganism(1.0,1.0,1.0,1.0));
+        buff.add(new AggressiveOrganism(1.0,1.0,1.0,1.0));
         return (ArrayList) buff;
     }
 

@@ -11,7 +11,12 @@ public class PassiveOrganism extends Organism {
         this.hostility = 1.0;
     }
 
+    public PassiveOrganism(double _reproductionRate, double _hostility,
+                           double _foodTaken, double _isAlive){
 
+        super();
+        this.hostility = 1.0;
+    }
 
     public Organism getObj(){
         return new PassiveOrganism();
@@ -41,7 +46,22 @@ public class PassiveOrganism extends Organism {
      */
     @Override
     public void objectInteraction(Organism o1){
-
+        if(o1.getHostility() == 2.0){
+            this.setFoodTaken(0.0);
+            o1.setFoodTaken(2.0);
+        }
+        if(o1.getHostility() == 1.5){
+            this.setFoodTaken(0.5);
+            o1.setFoodTaken(1.5);
+        }
+        if(o1.getHostility() == 1.0){
+            this.setFoodTaken(1.0);
+            o1.setFoodTaken(1.0);
+        }
+        if(o1.getHostility() == 0.5){
+            this.setFoodTaken(1.0);
+            o1.setFoodTaken(1.0);
+        }
     }
     @Override
     public String toString(){

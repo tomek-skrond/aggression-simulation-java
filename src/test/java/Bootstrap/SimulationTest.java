@@ -11,7 +11,7 @@ public class SimulationTest extends TestCase {
 
 
     Simulation sDef = new Simulation();
-    Simulation s = new Simulation(1,1,1,1,2);
+    Simulation s = new Simulation(200,200,200,200,31);
 
 
 

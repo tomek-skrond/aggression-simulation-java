@@ -27,6 +27,14 @@ public class OrganismPair implements IPairable {
     }
 
     @Override
+    public Organism getFirst(){
+        return this.first;
+    }
+    @Override
+    public Organism getSecond(){
+        return this.second;
+    }
+    @Override
     public String toString(){
 
         return "Pair(\n" + first.toString() + "\n" +

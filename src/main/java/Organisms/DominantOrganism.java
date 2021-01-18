@@ -10,6 +10,12 @@ public class DominantOrganism extends Organism {
         super();
         this.hostility = 2.0;
     }
+    public DominantOrganism(double _reproductionRate, double _hostility,
+                            double _foodTaken, double _isAlive){
+
+        super(_reproductionRate,_hostility,_foodTaken,_isAlive);
+        this.hostility = 2.0;
+    }
 
     /**
      * Konstruktor dla prototypów
@@ -41,7 +47,22 @@ public class DominantOrganism extends Organism {
      */
     @Override
     public void objectInteraction(Organism o1){
-
+        if(o1.getHostility() == 2.0){
+            this.setFoodTaken(0.0);
+            o1.setFoodTaken(0.0);
+        }
+        if(o1.getHostility() == 1.5){
+            this.setFoodTaken(1.0);
+            o1.setFoodTaken(1.0);
+        }
+        if(o1.getHostility() == 1.0){
+            this.setFoodTaken(2.0);
+            o1.setFoodTaken(0.0);
+        }
+        if(o1.getHostility() == 0.5){
+            this.setFoodTaken(2.0);
+            o1.setFoodTaken(0.0);
+        }
     }
 
     @Override

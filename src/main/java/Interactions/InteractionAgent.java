@@ -14,7 +14,12 @@ public class InteractionAgent {
         this.batches = _batches;
     }
 
-    void InteractionLoop(){
+    public void fightForFood(){
         //for b in batches -> b.interact
+        for(Batch b : batches){
+            b.getFirst().objectInteraction(b.getSecond());
+        }
     }
+
+
 }

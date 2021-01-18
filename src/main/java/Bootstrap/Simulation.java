@@ -31,6 +31,8 @@ public class Simulation implements IRandomizer {
         this.howManyCycles = _howManyCycles;
 
         this.structOrg = new StructureOrganisationAgent(paramsList);
+
+        simulationMainLoop();
     }
     public Simulation(){
         int[] randomInts = generateRandomIntArray(4, 3, 50);
@@ -42,27 +44,24 @@ public class Simulation implements IRandomizer {
         this.howManyCycles = generateRandomNumberInRange(5,15);
 
         this.structOrg = new StructureOrganisationAgent(randomInts);
+
+        simulationMainLoop();
     }
 
      void simulationMainLoop(){
-        int cycleCounter = 1;
+        int cycleCounter = 0;
 
         structOrg.initializeData();
         while(this.howManyCycles != cycleCounter){
 
             structOrg.constructData(structOrg.getOrganisms());
-            //interactions.fightForFood();
+            interactions.fightForFood();
             //interactions.evaluateBatches();
 
             /*
             for(Batch b : structOrg.getBatches()){
                 System.out.println(b);
             }*/
-
-            System.out.println("------------------------------");
-            for(Batch b : structOrg.getBatches()){
-                System.out.println(b);
-            }
 
             structOrg.setOrganisms(
                     structOrg.gatherCycleOutput()
@@ -72,6 +71,7 @@ public class Simulation implements IRandomizer {
             for(Batch b : structOrg.getBatches()){
                 System.out.println(b);
             }
+            System.out.println(structOrg.getBatches().size());
             cycleCounter++;
         }
     }
