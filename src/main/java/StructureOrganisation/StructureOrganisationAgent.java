@@ -36,7 +36,6 @@ public class StructureOrganisationAgent implements IRandomizer {
                 case A:
                     buff.add(new AggressiveOrganism());
                     break;
-
                 case D:
                     buff.add(new DominantOrganism());
                     break;
@@ -51,9 +50,10 @@ public class StructureOrganisationAgent implements IRandomizer {
         return buff;
 
     }
-    StructureOrganisationAgent generateOrganisms(){
+    List<Organism> generateOrganisms(){
 
         List<List<Organism>> l = new ArrayList<>();
+        List<Organism> list;
 
         int i = 0;
         for(OrganismType type : OrganismType.values()){
@@ -62,26 +62,28 @@ public class StructureOrganisationAgent implements IRandomizer {
             i++;
         }
 
-        this.organisms = l.stream()
+        list = l.stream()
                           .flatMap(x->x.stream())
                           .collect(Collectors.toList());
+        this.organisms = list;
 
-        return this;
+        return list;
     }
 
     private boolean validateParity(){
         return this.organisms.size() % 2 == 0;
     }
 
-    void backupOrganismSet(){
+    public void backupOrganismSet(){
         if(!validateParity()){
 
-            this.organisms.remove(
-                    generateRandomNumberInRange(0,this.organisms.size()-1)
+            this.organisms.add(
+                    new SubmissiveOrganism()
             );
         }
     }
-
+    //TODO: changed on updatePairs
+/*
    StructureOrganisationAgent groupIntoPairs() {
 
         this.backupOrganismSet();
@@ -118,9 +120,10 @@ public class StructureOrganisationAgent implements IRandomizer {
 
        return this;
     }
-
+*/
     ArrayList<OrganismPair> updatePairs(List<Organism> orgs) {
 
+        this.backupOrganismSet();
 
         //this.pairs.get(i).setFirst(this.organisms.get(i+j));
         //this.pairs.get(i).setSecond(this.organisms.get(i+j));
@@ -157,31 +160,42 @@ public class StructureOrganisationAgent implements IRandomizer {
         return Arrays.copyOfRange(arr,startIndex,endIndex);
     }
 
-    StructureOrganisationAgent groupIntoBatches(){
+    /*
+    List<Batch> groupIntoBatches(){
+        List<Batch> bufList = this.batches;
 
         for (OrganismPair p : this.pairs) {
-            this.batches.add(
+            bufList.add(
                     new Batch(p, 2.0)
             );
         }
-        return this;
+        return bufList;
     }
-
+*/
     public void initializeData(){
+        this.organisms = generateOrganisms();
+        this.organisms = shuffle();
+        this.pairs = updatePairs(this.organisms);
+        this.batches = updateBatches(this.pairs);
+        /*
         this.generateOrganisms()
                 .shuffle()
                 .groupIntoPairs()
                 .groupIntoBatches();
+         */
     }
 
     public void constructData(ArrayList<Organism> organisms){
         this.organisms = organisms;
-        this.pairs = new ArrayList<>();
-        this.batches = new ArrayList<>();
-
+        this.organisms = shuffle();
+        this.pairs = this.updatePairs(this.organisms);
+        this.batches = this.updateBatches(this.pairs);
+        /*
         this.shuffle()
                 .groupIntoPairs()
                 .groupIntoBatches();
+
+         */
     }
 
     public ArrayList<Organism> gatherCycleOutput(){
@@ -236,9 +250,9 @@ public class StructureOrganisationAgent implements IRandomizer {
         }
         return orgCounted;
     }
-    StructureOrganisationAgent shuffle(){
+    List<Organism> shuffle(){
         Collections.shuffle(this.organisms);
-        return this;
+        return this.organisms;
     }
 
     public ArrayList<OrganismPair> getPairs() {
@@ -253,9 +267,8 @@ public class StructureOrganisationAgent implements IRandomizer {
         return (ArrayList) this.batches;
     }
 
-    public StructureOrganisationAgent setBatches(ArrayList<Batch> bArray){
+    public void setBatches(ArrayList<Batch> bArray){
         this.batches = bArray;
-        return this;
     }
     public void setOrganisms(ArrayList<Organism> oArray){
         this.organisms = oArray;

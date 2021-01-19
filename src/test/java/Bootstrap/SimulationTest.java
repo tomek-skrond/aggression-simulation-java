@@ -11,7 +11,7 @@ public class SimulationTest extends TestCase {
 
 
    //Simulation sDef = new Simulation();
-    Simulation s = new Simulation(30,100,20,6,300);
+    Simulation s = new Simulation(2000,2000,2000,2000,7);
 
 
     public void testSimulationMainLoop() {

@@ -8,6 +8,9 @@ import StructureOrganisation.Batch;
 import StructureOrganisation.Interfaces.IRandomizer;
 import StructureOrganisation.StructureOrganisationAgent;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 public class Simulation implements IRandomizer {
 
@@ -61,37 +64,38 @@ public class Simulation implements IRandomizer {
             this.setupInteractions();
             interactions.fightForFood();
 
+            executeDuplication();
+            structOrg.backupOrganismSet();
             //TODO:food to 0 after gatherCycleOutput
-            //interactions.evaluateBatches();
 
-            /*
-            for(Batch b : structOrg.getBatches()){
-                System.out.println(b);
-            }*/
 
             structOrg.setOrganisms(
                     structOrg.gatherCycleOutput()
             );
 
             int[] orgCounted = structOrg.countOrganisms();
+
             System.out.println("------------------------------");
-            /*for(Batch b : structOrg.getBatches()){
-                System.out.println(b);
-            }*/
             System.out.println("cycle number: " + cycleCounter);
             System.out.println(
                     " A: " + orgCounted[0] + "\n" +
                     " D: " + orgCounted[1] + "\n" +
                     " P: " + orgCounted[2] + "\n" +
                     " S: " + orgCounted[3] + "\n" +
-                    " O: " + (Organism.organismCounter - Empty.emptyCounter) + "\n"
+                    " O: " + (Arrays.stream(orgCounted).sum()) + "\n"
             );
             System.out.println("size of batches: " + structOrg.getBatches().size());
             cycleCounter++;
         }
     }
 
+    private void executeDuplication() {
+        List<Organism> duplicationResults = interactions.duplication();
+        this.structOrg.setOrganisms(duplicationResults);
+        this.structOrg.constructData(this.structOrg.getOrganisms());
+    }
+
     void setupInteractions(){
-        interactions = new InteractionAgent(this.structOrg.getBatches());
+        interactions = new InteractionAgent(this.structOrg);
     }
 }
