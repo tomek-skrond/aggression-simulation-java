@@ -2,13 +2,14 @@ package Interactions;
 
 import Organisms.Abstractions.Organism;
 import StructureOrganisation.Batch;
+import StructureOrganisation.Interfaces.IRandomizer;
 import StructureOrganisation.StructureOrganisationAgent;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InteractionAgent {
+public class InteractionAgent implements IRandomizer{
 
     List<Batch> batches;
     List<Organism> organisms;
@@ -21,6 +22,8 @@ public class InteractionAgent {
         this.batches = structOrg.getBatches();
         this.organisms = structOrg.getOrganisms();
     }
+
+
 
     public void fightForFood(){
         //for b in batches -> b.interact
@@ -42,6 +45,7 @@ public class InteractionAgent {
         List<Organism> toClone = new ArrayList<>();
 
 
+
         for (Organism o : this.organisms) {
             if(o.getFoodTaken() == 2.0){
                 toClone.add(o);
@@ -55,4 +59,14 @@ public class InteractionAgent {
         return bufList;
     }
 
+    private void resolveProbabilities(){
+        for(Organism o : this.organisms){
+            if(o.getFoodTaken() == 0.5){
+                o.setFoodTaken((double)generateRandomNumberInRange(0,1));
+            }
+            if(o.getFoodTaken() == 1.5){
+                o.setFoodTaken((double)generateRandomNumberInRange(1,2));
+            }
+        }
+    }
 }

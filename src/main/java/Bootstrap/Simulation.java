@@ -25,9 +25,9 @@ public class Simulation implements IRandomizer {
     private InteractionAgent interactions; //assign when all structures are organised(put in batches)
 
 
-    public Simulation(int _passive,int _submissive,int _aggressive,int _dominant,int _howManyCycles){
+    public Simulation(int _aggressive,int _dominant,int _passive,int _submissive,int _howManyCycles){
 
-        int [] paramsList = {_passive,_submissive,_aggressive,_dominant};
+        int [] paramsList = {_aggressive,_dominant,_passive,_submissive};
 
         this.passive = _passive;
         this.submissive = _submissive;
@@ -66,9 +66,6 @@ public class Simulation implements IRandomizer {
 
             executeDuplication();
             structOrg.backupOrganismSet();
-            //TODO:food to 0 after gatherCycleOutput
-
-
             structOrg.setOrganisms(
                     structOrg.gatherCycleOutput()
             );

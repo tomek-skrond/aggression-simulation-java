@@ -66,8 +66,8 @@ public class SubmissiveOrganism extends Organism {
             o1.setFoodTaken(1.0);
         }
         if(o1.getHostility() == 0.5){
-            this.setFoodTaken(1.0);
-            o1.setFoodTaken(1.0);
+            this.setFoodTaken(2.0);
+            o1.setFoodTaken(0.0);
         }
         if(deadCounter == 50){
             duplicateIndicator = true;

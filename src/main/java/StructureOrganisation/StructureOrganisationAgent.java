@@ -18,7 +18,7 @@ public class StructureOrganisationAgent implements IRandomizer {
 
     private List<Organism> organisms;
     private List<OrganismPair> pairs;
-    public List<Batch> batches;
+    private List<Batch> batches;
     private int [] paramsList;
 
     public StructureOrganisationAgent(int [] orgParamsList){
