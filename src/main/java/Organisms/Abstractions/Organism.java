@@ -10,11 +10,10 @@ import Organisms.Interfaces.OrganismInterface;
  **/
 public abstract class Organism implements ICloneable, CanInteract, OrganismInterface {
 
-
-    private Double reproductionRate;
-    protected Double hostility;
-    private Double foodTaken;
-    protected Double isAlive;
+    private double reproductionRate;
+    protected double hostility;
+    private double foodTaken;
+    protected double isAlive;
     public static int organismCounter = 0;
 
     /**
@@ -54,6 +53,10 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         organismCounter++;
     }
 
+    /**
+     * toString - zwraca String opisujący instancję Organizmu
+     * @return String
+     */
     @Override
     public String toString(){
         return "(r_r: " + this.reproductionRate + "," +
@@ -62,45 +65,56 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
                 "alive: " + this.isAlive + ")";
     }
 
-    public boolean evaluateState(){
-        if(this.getFoodTaken() >= 1.0){
-            this.setIsAlive(1.0);
-            return true;
-        }
-        else{
-            setIsAlive(0.0);
-            return false;
-        }
-    }
-
+    /**
+     * getter zmiennej reproductionRate
+     * @return double
+     */
     public double getReproductionRate() {
         return reproductionRate;
     }
-
+    /**
+     * setter zmiennej reproductionRate
+     */
     public void setReproductionRate(Double reproductionRate) {
         this.reproductionRate = reproductionRate;
     }
-
+    /**
+     * getter zmiennej hostility
+     * @return double
+     */
     public double getHostility() {
         return hostility;
     }
-
+    /**
+     * setter zmiennej hostility
+     * @return double
+     */
     public void setHostility(Double hostility) {
         this.hostility = hostility;
     }
-
+    /**
+     * getter zmiennej foodTaken
+     * @return double
+     */
     public double getFoodTaken() {
         return foodTaken;
     }
-
+    /**
+     * setter zmiennej foodTaken
+     */
     public void setFoodTaken(Double foodTaken) {
         this.foodTaken = foodTaken;
     }
-
+    /**
+     * getter zmiennej isAlive
+     * @return double
+     */
     public double getIsAlive() {
         return isAlive;
     }
-
+    /**
+     * setter zmiennej isAlive
+     */
     public void setIsAlive(Double isAlive) {
         this.isAlive = isAlive;
     }

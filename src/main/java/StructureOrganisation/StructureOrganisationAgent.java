@@ -5,6 +5,7 @@ import Organisms.Abstractions.Organism;
 import Organisms.Enums.OrganismType;
 import StructureOrganisation.Interfaces.IRandomizer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -82,51 +83,9 @@ public class StructureOrganisationAgent implements IRandomizer {
             );
         }
     }
-    //TODO: changed on updatePairs
-/*
-   StructureOrganisationAgent groupIntoPairs() {
-
-        this.backupOrganismSet();
-
-
-        for (int i = 0; i < this.organisms.size()/2; i++) {
-
-            this.pairs.add(
-                    new OrganismPair()
-            );
-        }
-
-       //this.pairs.get(i).setFirst(this.organisms.get(i+j));
-       //this.pairs.get(i).setSecond(this.organisms.get(i+j));
-
-
-        List<Organism> org = this.organisms;
-        Organism[] orgArr = new Organism[organisms.size()];
-        org.toArray(orgArr);
-
-        Organism[][] resultArr = new Organism[organisms.size()/2][];
-
-        int counter = 0;
-
-        for (int i = 0; i < organisms.size(); i+=2) {
-           resultArr[counter] = Arrays.copyOf(
-                   getSlice(orgArr,i,i+2),resultArr.length+2
-           );
-           this.pairs.get(counter).setFirst(resultArr[counter][0]);
-           this.pairs.get(counter).setSecond(resultArr[counter][1]);
-
-           counter++;
-        }
-
-       return this;
-    }
-*/
     ArrayList<OrganismPair> updatePairs(List<Organism> orgs) {
 
         this.backupOrganismSet();
-
-        //this.pairs.get(i).setFirst(this.organisms.get(i+j));
-        //this.pairs.get(i).setSecond(this.organisms.get(i+j));
 
         List<OrganismPair> pairsBuff = new ArrayList<>();
         Organism[] orgArr = new Organism[orgs.size()];
@@ -140,8 +99,6 @@ public class StructureOrganisationAgent implements IRandomizer {
             resultArr[counter] = Arrays.copyOf(
                     getSlice(orgArr,i,i+2),resultArr.length+2
             );
-            //this.pairs.get(counter).setFirst(resultArr[counter][0]);
-            //this.pairs.get(counter).setSecond(resultArr[counter][1]);
 
             counter++;
         }
@@ -202,7 +159,6 @@ public class StructureOrganisationAgent implements IRandomizer {
         ArrayList<Batch> inputBatches = this.getBatches();
         List<Organism> buff = new ArrayList<>();
 
-
         for(Batch b : inputBatches){
             Organism first = b.getFirst();
             Organism second = b.getSecond();
@@ -215,10 +171,18 @@ public class StructureOrganisationAgent implements IRandomizer {
             }
         }
 
+        flushFood(buff);
+
         this.organisms = buff;
         this.pairs = this.updatePairs(buff);
         this.batches = updateBatches(this.pairs);
         return (ArrayList) this.organisms;
+    }
+
+    private void flushFood(List<Organism> orgs) {
+        for(Organism o : orgs){
+            o.setFoodTaken(0.0);
+        }
     }
 
     private List<Batch> updateBatches(List<OrganismPair> pairbuffArr) {
@@ -250,6 +214,7 @@ public class StructureOrganisationAgent implements IRandomizer {
         }
         return orgCounted;
     }
+
     List<Organism> shuffle(){
         Collections.shuffle(this.organisms);
         return this.organisms;

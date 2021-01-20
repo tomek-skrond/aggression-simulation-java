@@ -61,8 +61,8 @@ public class PassiveOrganism extends Organism {
             o1.setFoodTaken(1.0);
         }
         if(o1.getHostility() == 0.5){
-            this.setFoodTaken(1.0);
-            o1.setFoodTaken(1.0);
+            this.setFoodTaken(1.5);
+            o1.setFoodTaken(0.5);
         }
     }
 

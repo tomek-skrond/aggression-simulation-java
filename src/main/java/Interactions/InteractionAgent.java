@@ -23,8 +23,6 @@ public class InteractionAgent implements IRandomizer{
         this.organisms = structOrg.getOrganisms();
     }
 
-
-
     public void fightForFood(){
         //for b in batches -> b.interact
         for(Batch b : batches){
@@ -32,19 +30,11 @@ public class InteractionAgent implements IRandomizer{
         }
     }
 
-    public List<Batch> getBatches() {
-        return batches;
-    }
-
-    public void setBatches(List<Batch> batches) {
-        this.batches = batches;
-    }
-
     public List<Organism> duplication(){
         List<Organism> bufList = this.organisms;
         List<Organism> toClone = new ArrayList<>();
 
-
+        resolveProbabilities();
 
         for (Organism o : this.organisms) {
             if(o.getFoodTaken() == 2.0){

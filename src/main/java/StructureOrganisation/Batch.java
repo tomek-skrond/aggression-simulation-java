@@ -4,11 +4,15 @@ import Organisms.Abstractions.Organism;
 import StructureOrganisation.Interfaces.IPairable;
 
 public class Batch implements IPairable{
+
     OrganismPair pair;
     Double foodPacket;
 
-
-
+    /**
+     * konstruktor Batch
+     * @param _pair - para organizmow
+     * @param _foodPacket - pakiet zywnosci przydzielony dla Batcha
+     */
     public Batch(OrganismPair _pair, Double _foodPacket){
         this.pair = _pair;
         this.foodPacket = _foodPacket;

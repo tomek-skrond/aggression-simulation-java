@@ -2,9 +2,10 @@ package Main;
 import Bootstrap.Simulation;
 
 public class Main {
-    public static void main(String [] args){
+    public static void main(String [] args) throws Exception {
 
-        //Simulation b = new Simulation(2000,2000,2000,2000,30);
+
+        Simulation b = new Simulation(200,200,200,200,30);
 
     }
 }
