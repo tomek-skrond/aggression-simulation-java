@@ -10,12 +10,12 @@ import static Organisms.Enums.OrganismType.*;
 
 public class StructureOrganisationAgentTest extends TestCase {
 
-    int [] paramsList = {1,1,1,1};
+    int [] paramsList = {1,1,2,1};
 
     StructureOrganisationAgent structOrg = new StructureOrganisationAgent(paramsList);
 
     public void testMakeOrganismsOfType() {
-        /*
+
         List<Organism> list = structOrg.makeOrganismsOfType(A,4);
 
         for(Organism o : list){
@@ -27,18 +27,13 @@ public class StructureOrganisationAgentTest extends TestCase {
             assert(list.get(i).getHostility() == 1.5);
         }
 
-*/
     }
 
     public void testGenerateOrganisms() {
-        /*
-        int [] paramsCheck = {0,0,0,0};
-        ArrayList<Organism> list = structOrg
-                .generateOrganisms()
-                .shuffle()
-                .getOrganisms();
 
-        //list = structOrg.getOrganisms();
+        int [] paramsCheck = {0,0,0,0};
+
+        List<Organism> list = structOrg.generateOrganisms();
 
 
         for(Organism o : list){
@@ -61,18 +56,12 @@ public class StructureOrganisationAgentTest extends TestCase {
             assert(paramsList[i] == paramsCheck[i]);
         }
 
-         */
     }
 
-    public void testGroupIntoPairs() {
-/*
-        ArrayList<OrganismPair> pairs = structOrg
-                                        .generateOrganisms()
-                                        .shuffle()
-                                        .groupIntoPairs()
-                                        .getPairs();
+    public void testUpdatePairs() {
 
 
+        ArrayList<OrganismPair> pairs = structOrg.updatePairs(structOrg.generateOrganisms());
 
         for(Object o : structOrg.getOrganisms()){
             System.out.println(o);
@@ -89,20 +78,22 @@ public class StructureOrganisationAgentTest extends TestCase {
             assert(p.second == pairs.get(i).second);
             i++;
         }
-*/
+
     }
 
 
-    public void testGroupIntoBatches() {
-        /*
-        ArrayList<Batch> batches = structOrg
-                .generateOrganisms()
-                .shuffle()
-                .groupIntoPairs()
-                .groupIntoBatches()
-                .getBatches();
+    public void testUpdateBatches() {
 
-        ArrayList<OrganismPair> pairs = structOrg.getPairs();
+        ArrayList<OrganismPair> pairs = structOrg.updatePairs(
+                structOrg.generateOrganisms()
+        );
+
+        ArrayList<Batch> batches = (ArrayList<Batch>) structOrg.updateBatches(
+                structOrg.updatePairs(
+                        structOrg.generateOrganisms()
+                )
+        );
+
         ArrayList<Organism> organisms = structOrg.getOrganisms();
 
         for(Organism o : organisms){
@@ -118,23 +109,27 @@ public class StructureOrganisationAgentTest extends TestCase {
         i=0;
         for(Batch b : batches){
             System.out.println(b);
-            assert(b.pair.first == pairs.get(i).first && b.foodPacket == 2.0);
-            assert(b.pair.second== pairs.get(i).second);
+            assert(b.foodPacket == 2.0);
+            assert(b.pair.first.getHostility() == pairs.get(i).first.getHostility());
+            assert(b.pair.second.getHostility() == pairs.get(i).second.getHostility());
             i++;
         }
 
-         */
     }
 
     public void testConstructData() {
+        List<Organism> list = structOrg.generateOrganisms();
+        List<OrganismPair> pairs = structOrg.updatePairs(list);
+        List<Batch> batches = structOrg.updateBatches(pairs);
 
+        structOrg.constructData((ArrayList<Organism>) list);
+
+        assert(batches.size() == structOrg.getBatches().size());
     }
 
     public void testInitializeData() {
         structOrg.initializeData();
-        for(Batch b : structOrg.getBatches()){
-            System.out.println(b);
-        }
+
     }
 }
 

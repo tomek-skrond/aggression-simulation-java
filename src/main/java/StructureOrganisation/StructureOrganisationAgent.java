@@ -5,6 +5,7 @@ import Organisms.Abstractions.Organism;
 import Organisms.Enums.OrganismType;
 import StructureOrganisation.Interfaces.IRandomizer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +22,7 @@ public class StructureOrganisationAgent implements IRandomizer {
     /**
      * StructureOrganisationAgent
      * Klasa odpowiadajaca za organizowanie struktur
-     * @param orgParamsList
+     * @param orgParamsList lista parametrow symulacji (liczb odpowiadajacym poczatkowym liczbom danych organizmow)
      */
     public StructureOrganisationAgent(int [] orgParamsList){
         this.organisms = new ArrayList<>();
@@ -177,7 +178,6 @@ public class StructureOrganisationAgent implements IRandomizer {
         this.organisms = shuffle();
         this.pairs = this.updatePairs(this.organisms);
         this.batches = this.updateBatches(this.pairs);
-
     }
 
     /**
@@ -226,7 +226,7 @@ public class StructureOrganisationAgent implements IRandomizer {
      * @param pairbuffArr pary organizmow
      * @return
      */
-    private List<Batch> updateBatches(List<OrganismPair> pairbuffArr) {
+    List<Batch> updateBatches(List<OrganismPair> pairbuffArr) {
         List<Batch> batchBuffArr = new ArrayList<>();
         for(OrganismPair p : pairbuffArr){
             batchBuffArr.add(
@@ -308,5 +308,14 @@ public class StructureOrganisationAgent implements IRandomizer {
      */
     public void setOrganisms(List<Organism> organisms) {
         this.organisms = organisms;
+    }
+
+    /**
+     * getPairs
+     * getter
+     * @return ArrayList{OrganismPair}
+     */
+    public ArrayList<OrganismPair> getPairs() {
+        return (ArrayList<OrganismPair>) this.pairs;
     }
 }
