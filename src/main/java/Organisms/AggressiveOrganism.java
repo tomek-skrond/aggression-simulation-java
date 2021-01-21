@@ -19,36 +19,20 @@ public class AggressiveOrganism extends Organism {
     }
 
     /**
-     *
-     * @param _hostility
-     * @param _foodTaken
-     * @param _isAlive
+     * Konstruktor
+     * @param _hostility stopień agresji danego organizmu
+     * @param _foodTaken ilość jedzenia zebrana podczas walki
+     * @param _isAlive zmienna pokazująca czy organizm jest w stanie przeżyć do następnego cyklu
      */
-    public AggressiveOrganism(double _reproductionRate,double _hostility,
+    public AggressiveOrganism(double _hostility,
                               double _foodTaken,double _isAlive){
-        super(_reproductionRate,_hostility,_foodTaken,_isAlive);
+        super(_hostility,_foodTaken,_isAlive);
         aggressiveCounter++;
-    }
-
-    /**
-     * Konstruktor umożliwiający funkcję klonowania
-     * @param source
-     */
-    public AggressiveOrganism(AggressiveOrganism source){
-        super(source);
-        this.hostility = 1.5;
-        aggressiveCounter++;
-    }
-
-    @Override
-    public Organism cloneObject(){
-        aggressiveCounter++;
-        return new AggressiveOrganism(this);
     }
 
     /**
      * Funkcja interakcji okreslajaca interakcje z innym organizmem(o1)
-     * @param o1
+     * @param o1 Organizm
      */
     @Override
     public void objectInteraction(Organism o1){

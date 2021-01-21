@@ -35,9 +35,4 @@ public class Empty extends Organism {
         emptyCounter++;
         return "Empty " + super.toString();
     }
-
-    @Override
-    public Organism cloneObject() {
-        return null;
-    }
 }

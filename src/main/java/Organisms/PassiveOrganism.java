@@ -29,26 +29,6 @@ public class PassiveOrganism extends Organism {
     }
 
     /**
-     * Konstruktor dla Prototypów
-     * @param source
-     */
-    public PassiveOrganism(PassiveOrganism source){
-        super(source);
-        this.hostility = 0.5;
-        passiveCounter++;
-    }
-
-    /**
-     * Funkcja klonująca(prototypy)
-     * @return PassiveOrganism
-     */
-    @Override
-    public Organism cloneObject(){
-        passiveCounter++;
-        return new PassiveOrganism(this);
-    }
-
-    /**
      * Funkcja interakcji okreslajaca interakcje z innym organizmem(o1)
      * @param o1
      */

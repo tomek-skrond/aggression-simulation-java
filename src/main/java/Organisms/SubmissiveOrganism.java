@@ -36,26 +36,6 @@ public class SubmissiveOrganism extends Organism {
     }
 
     /**
-     * Konstruktor dla prototypów
-     * @param source
-     */
-    public SubmissiveOrganism(SubmissiveOrganism source){
-        super(source);
-        this.hostility = 0.5;
-        submissiveCounter++;
-    }
-
-    /**
-     * Funkcja klonująca
-     * @return SubmissiveOrganism
-     */
-    @Override
-    public Organism cloneObject(){
-        submissiveCounter++;
-        return new SubmissiveOrganism(this);
-    }
-
-    /**
      * Funkcja określająca interakcję organizmu z innym organizmem(o1)
      * Kiedy zmienna submissiveCounter wchodzi w dany zakres, organizmy duplikują się
      * @param o1 organizm z którym obiekt wchodzi w interakcje

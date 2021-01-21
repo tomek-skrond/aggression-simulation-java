@@ -15,14 +15,13 @@ public class DominantOrganism extends Organism {
         super();
         this.hostility = 2.0;
         dominantCounter++;
-
     }
 
     /**
-     *
-     * @param _hostility
-     * @param _foodTaken
-     * @param _isAlive
+     * Konstruktor
+     * @param _hostility stopień agresji danego organizmu
+     * @param _foodTaken ilość jedzenia zebrana podczas walki
+     * @param _isAlive zmienna pokazująca czy organizm jest w stanie przeżyć do następnego cyklu
      */
     public DominantOrganism(double _hostility,
                             double _foodTaken, double _isAlive){
@@ -30,26 +29,6 @@ public class DominantOrganism extends Organism {
         super(_hostility,_foodTaken,_isAlive);
         this.hostility = 2.0;
         dominantCounter++;
-    }
-
-    /**
-     * Konstruktor dla prototypów
-     * @param source
-     */
-    public DominantOrganism(DominantOrganism source){
-        super(source);
-        this.hostility = 2.0;
-        dominantCounter++;
-    }
-
-    /**
-     * Funkcja klonująca(prototypy)
-     * @return DominantOrganism
-     */
-    @Override
-    public Organism cloneObject(){
-        dominantCounter++;
-        return new DominantOrganism(this);
     }
 
     /**

@@ -2,13 +2,12 @@ package Organisms.Abstractions;
 
 
 import Organisms.Interfaces.CanInteract;
-import Organisms.Interfaces.ICloneable;
 import Organisms.Interfaces.OrganismInterface;
 
 /**
  * Organism abstraction/klasa abstrakcyjna dla organizmów
  **/
-public abstract class Organism implements ICloneable, CanInteract, OrganismInterface {
+public abstract class Organism implements CanInteract, OrganismInterface {
 
     protected double hostility;
     private double foodTaken;
@@ -36,19 +35,6 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         this.hostility = _hostility;
         this.foodTaken = _foodTaken;
         this.isAlive = _isAlive;
-        organismCounter++;
-
-    }
-
-    /**
-     *
-     * @param source
-     */
-    public Organism(Organism source){
-        this();
-        this.foodTaken = source.foodTaken;
-        this.hostility = source.hostility;
-        this.isAlive = source.isAlive;
         organismCounter++;
     }
 
