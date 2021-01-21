@@ -27,7 +27,7 @@ public class Empty extends Organism {
     }
 
     /**
-     * toString - zwraca String opisujący instancję
+     * toString - zwraca String opisujący instancję Organizmu
      * @return String
      */
     @Override

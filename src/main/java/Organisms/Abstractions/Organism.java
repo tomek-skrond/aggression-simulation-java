@@ -6,11 +6,10 @@ import Organisms.Interfaces.ICloneable;
 import Organisms.Interfaces.OrganismInterface;
 
 /**
-    Organism abstraction/klasa abstrakcyjna dla organizmów
+ * Organism abstraction/klasa abstrakcyjna dla organizmów
  **/
 public abstract class Organism implements ICloneable, CanInteract, OrganismInterface {
 
-    private double reproductionRate;
     protected double hostility;
     private double foodTaken;
     protected double isAlive;
@@ -20,7 +19,6 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
         Default constructor/Konstruktor domyślny
      **/
     public Organism(){
-        this.reproductionRate = 0.0;
         this.hostility = 0.0;
         this.foodTaken = 0.0;
         this.isAlive = 1.0;
@@ -29,14 +27,12 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
 
     /**
      * Constructor/Konstruktor
-     * @param _reproductionRate -- współczynnik reprodukcji - warunkuje prawdopodobieństwo rozmnożenia się organizmu w następnym cyklu
      * @param _hostility -- współczynnik agresji - warunkuje sposób interakcji z innymi organizmami
      * @param _foodTaken -- jedzenie, które udało się zdobyć przez organizm w iteracji
      * @param _isAlive -- określa prawdopodobieństwo przeżycia organizmu w następnym cyklu
      */
-    public Organism(double _reproductionRate, double _hostility,
+    public Organism(double _hostility,
                     double _foodTaken, double _isAlive){
-        this.reproductionRate = _reproductionRate;
         this.hostility = _hostility;
         this.foodTaken = _foodTaken;
         this.isAlive = _isAlive;
@@ -44,11 +40,14 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
 
     }
 
+    /**
+     *
+     * @param source
+     */
     public Organism(Organism source){
         this();
         this.foodTaken = source.foodTaken;
         this.hostility = source.hostility;
-        this.reproductionRate = source.reproductionRate;
         this.isAlive = source.isAlive;
         organismCounter++;
     }
@@ -59,25 +58,12 @@ public abstract class Organism implements ICloneable, CanInteract, OrganismInter
      */
     @Override
     public String toString(){
-        return "(r_r: " + this.reproductionRate + "," +
+        return "(" +
                 "host: " + this.hostility + "," +
                 "food: " + this.foodTaken + "," +
                 "alive: " + this.isAlive + ")";
     }
 
-    /**
-     * getter zmiennej reproductionRate
-     * @return double
-     */
-    public double getReproductionRate() {
-        return reproductionRate;
-    }
-    /**
-     * setter zmiennej reproductionRate
-     */
-    public void setReproductionRate(Double reproductionRate) {
-        this.reproductionRate = reproductionRate;
-    }
     /**
      * getter zmiennej hostility
      * @return double

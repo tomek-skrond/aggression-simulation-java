@@ -8,16 +8,26 @@ import Organisms.Abstractions.Organism;
 public class DominantOrganism extends Organism {
     public static int dominantCounter = 0;
 
+    /**
+     * Konstruktor domyslny
+     */
     public DominantOrganism(){
         super();
         this.hostility = 2.0;
         dominantCounter++;
 
     }
-    public DominantOrganism(double _reproductionRate, double _hostility,
+
+    /**
+     *
+     * @param _hostility
+     * @param _foodTaken
+     * @param _isAlive
+     */
+    public DominantOrganism(double _hostility,
                             double _foodTaken, double _isAlive){
 
-        super(_reproductionRate,_hostility,_foodTaken,_isAlive);
+        super(_hostility,_foodTaken,_isAlive);
         this.hostility = 2.0;
         dominantCounter++;
     }
@@ -43,7 +53,7 @@ public class DominantOrganism extends Organism {
     }
 
     /**
-     * Funkcja interakcji
+     * Funkcja interakcji okreslajaca interakcje z innym organizmem(o1)
      * @param o1
      */
     @Override

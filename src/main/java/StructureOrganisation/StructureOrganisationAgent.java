@@ -5,7 +5,6 @@ import Organisms.Abstractions.Organism;
 import Organisms.Enums.OrganismType;
 import StructureOrganisation.Interfaces.IRandomizer;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,14 +13,16 @@ import java.util.stream.Collectors;
 
 public class StructureOrganisationAgent implements IRandomizer {
 
-
-
-
     private List<Organism> organisms;
     private List<OrganismPair> pairs;
     private List<Batch> batches;
     private int [] paramsList;
 
+    /**
+     * StructureOrganisationAgent
+     * Klasa odpowiadajaca za organizowanie struktur
+     * @param orgParamsList
+     */
     public StructureOrganisationAgent(int [] orgParamsList){
         this.organisms = new ArrayList<>();
         this.pairs = new ArrayList<>();
@@ -29,6 +30,13 @@ public class StructureOrganisationAgent implements IRandomizer {
         this.paramsList = orgParamsList;
     }
 
+    /**
+     * makeOrganismOfType
+     * Funkcja odpowiada za wygenerowanie listy organizmow danego typu
+     * @param type typ organizmu
+     * @param howMany ile organizmow ma byc wygenerowanych
+     * @return List{Organism}
+     */
     List<Organism> makeOrganismsOfType(OrganismType type, int howMany){
         List<Organism> buff = new ArrayList<>();
 
@@ -51,6 +59,12 @@ public class StructureOrganisationAgent implements IRandomizer {
         return buff;
 
     }
+
+    /**
+     * generateOrganisms
+     * Funkcja generujaca liste organizmow gotowych do przetworzenia dalej
+     * @return List{Organism}
+     */
     List<Organism> generateOrganisms(){
 
         List<List<Organism>> l = new ArrayList<>();
@@ -58,7 +72,7 @@ public class StructureOrganisationAgent implements IRandomizer {
 
         int i = 0;
         for(OrganismType type : OrganismType.values()){
-            //this.organisms.add((Organism) makeOrganismsOfType(type,i));
+
             l.add(makeOrganismsOfType(type,paramsList[i]));
             i++;
         }
@@ -71,10 +85,19 @@ public class StructureOrganisationAgent implements IRandomizer {
         return list;
     }
 
+    /**
+     * validateParity
+     * Funkcja zwraca czy rozmiar tablicy organizmow jest parzysty
+     * @return boolean
+     */
     private boolean validateParity(){
         return this.organisms.size() % 2 == 0;
     }
 
+    /**
+     * backupOrganismSet
+     * Funkcja usuwajaca nieparzystosc w zbiorze organizmow
+     */
     public void backupOrganismSet(){
         if(!validateParity()){
 
@@ -83,6 +106,13 @@ public class StructureOrganisationAgent implements IRandomizer {
             );
         }
     }
+
+    /**
+     * updatePairs
+     * Funkcja zbierajaca wszystkie organizmy do par
+     * @param orgs lista organizmow
+     * @return List{OrganismPair}
+     */
     ArrayList<OrganismPair> updatePairs(List<Organism> orgs) {
 
         this.backupOrganismSet();
@@ -113,48 +143,48 @@ public class StructureOrganisationAgent implements IRandomizer {
 
         return (ArrayList<OrganismPair>) pairsBuff;
     }
+
+    /**
+     * getSlice
+     * funkcja pobierajaca fragment tablicy w danym zakresie
+     * @param arr tablica organizmow
+     * @param startIndex indeks rozpoczecia fragmentacji tablicy
+     * @param endIndex indeks konca fragmentacji tablicy
+     * @return Organism[]
+     */
     private Organism[] getSlice(Organism[] arr,int startIndex,int endIndex){
         return Arrays.copyOfRange(arr,startIndex,endIndex);
     }
 
-    /*
-    List<Batch> groupIntoBatches(){
-        List<Batch> bufList = this.batches;
-
-        for (OrganismPair p : this.pairs) {
-            bufList.add(
-                    new Batch(p, 2.0)
-            );
-        }
-        return bufList;
-    }
-*/
+    /**
+     * initializeData
+     * inicjalizuje dane wejsciowe symulacji
+     */
     public void initializeData(){
         this.organisms = generateOrganisms();
         this.organisms = shuffle();
         this.pairs = updatePairs(this.organisms);
         this.batches = updateBatches(this.pairs);
-        /*
-        this.generateOrganisms()
-                .shuffle()
-                .groupIntoPairs()
-                .groupIntoBatches();
-         */
     }
 
+    /**
+     * constructData
+     * funkcja skladajaca dane, zeby byly gotowe do interakcji
+     * @param organisms lista organizmow
+     */
     public void constructData(ArrayList<Organism> organisms){
         this.organisms = organisms;
         this.organisms = shuffle();
         this.pairs = this.updatePairs(this.organisms);
         this.batches = this.updateBatches(this.pairs);
-        /*
-        this.shuffle()
-                .groupIntoPairs()
-                .groupIntoBatches();
 
-         */
     }
 
+    /**
+     * gatherCycleOutput
+     * funkcja zbierajaca koncowa liste organizmow jako wynik cyklu
+     * @return
+     */
     public ArrayList<Organism> gatherCycleOutput(){
         ArrayList<Batch> inputBatches = this.getBatches();
         List<Organism> buff = new ArrayList<>();
@@ -179,12 +209,23 @@ public class StructureOrganisationAgent implements IRandomizer {
         return (ArrayList) this.organisms;
     }
 
+    /**
+     * flushFood
+     * wyzerowanie jednostek jedzenia
+     * @param orgs
+     */
     private void flushFood(List<Organism> orgs) {
         for(Organism o : orgs){
             o.setFoodTaken(0.0);
         }
     }
 
+    /**
+     * updateBatches
+     * zebranie par organizmow do Batchy
+     * @param pairbuffArr pary organizmow
+     * @return
+     */
     private List<Batch> updateBatches(List<OrganismPair> pairbuffArr) {
         List<Batch> batchBuffArr = new ArrayList<>();
         for(OrganismPair p : pairbuffArr){
@@ -195,6 +236,11 @@ public class StructureOrganisationAgent implements IRandomizer {
         return batchBuffArr;
     }
 
+    /**
+     * countOrganisms
+     * zliczenie organizmow danych typow w cyklu
+     * @return int[]
+     */
     public int[] countOrganisms(){
         int[] orgCounted = new int[4];
 
@@ -215,34 +261,51 @@ public class StructureOrganisationAgent implements IRandomizer {
         return orgCounted;
     }
 
+    /**
+     * shuffle
+     * potasowanie organizmow, w celu losowego dobrania ich w Batchach
+     * @return List{Organism}
+     */
     List<Organism> shuffle(){
         Collections.shuffle(this.organisms);
         return this.organisms;
     }
 
-    public ArrayList<OrganismPair> getPairs() {
-        return (ArrayList) this.pairs;
-    }
-
+    /**
+     * getOrganisms
+     * getter
+     * @return Array{Organism}
+     */
     public ArrayList<Organism> getOrganisms() {
         return (ArrayList) this.organisms;
     }
-
+    /**
+     * getBatches
+     * getter
+     * @return Array{Batch}
+     */
     public ArrayList<Batch> getBatches() {
         return (ArrayList) this.batches;
     }
-
-    public void setBatches(ArrayList<Batch> bArray){
-        this.batches = bArray;
-    }
+    /**
+     * setOrganisms
+     * setter
+     */
     public void setOrganisms(ArrayList<Organism> oArray){
         this.organisms = oArray;
     }
-
+    /**
+     * getParamsList
+     * getter
+     * @return int[]
+     */
     public int[] getParamsList() {
         return paramsList;
     }
-
+    /**
+     * setOrganisms
+     * Setter
+     */
     public void setOrganisms(List<Organism> organisms) {
         this.organisms = organisms;
     }

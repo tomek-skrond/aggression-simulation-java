@@ -11,10 +11,13 @@ public class SimulationTest extends TestCase {
 
 
    //Simulation sDef = new Simulation();
-    Simulation s = new Simulation(200,200,200,200,20);
+    Simulation s = new Simulation(200,200,200,200,20,true);
+
+    public SimulationTest() throws Exception {
+    }
 
 
-    public void testSimulationMainLoop() {
+    public void testSimulationMainLoop() throws Exception {
 
         int[] params = s.structOrg.getParamsList();
 

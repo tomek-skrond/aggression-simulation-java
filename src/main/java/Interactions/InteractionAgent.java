@@ -1,6 +1,8 @@
 package Interactions;
 
 import Organisms.Abstractions.Organism;
+import Organisms.PassiveOrganism;
+import Organisms.SubmissiveOrganism;
 import StructureOrganisation.Batch;
 import StructureOrganisation.Interfaces.IRandomizer;
 import StructureOrganisation.StructureOrganisationAgent;
@@ -9,20 +11,27 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * klasa wykonujaca interakcje miedzy organizmami
+ */
+
 public class InteractionAgent implements IRandomizer{
 
     List<Batch> batches;
     List<Organism> organisms;
 
-    public void setOrganisms(List<Organism> organisms) {
-        this.organisms = organisms;
-    }
-
+    /**
+     * Konstruktor
+     * @param structOrg obiekt klasy StructureOrganisationAgent
+     */
     public InteractionAgent(StructureOrganisationAgent structOrg){
         this.batches = structOrg.getBatches();
         this.organisms = structOrg.getOrganisms();
     }
 
+    /**
+     * funkcja wykonujaca interakcje miedzy wszystkimi organizmami
+     */
     public void fightForFood(){
         //for b in batches -> b.interact
         for(Batch b : batches){
@@ -30,11 +39,17 @@ public class InteractionAgent implements IRandomizer{
         }
     }
 
+    /**
+     * Zwraca nowa liste organizmow, w ktorej organizmy o wspolczynniku jedzenia 2.0 sa skopiowane
+     * @return List{Organism}
+     */
     public List<Organism> duplication(){
         List<Organism> bufList = this.organisms;
         List<Organism> toClone = new ArrayList<>();
 
-        resolveProbabilities();
+        this.resolveProbabilities();
+
+        this.checkSpecialAbilities();
 
         for (Organism o : this.organisms) {
             if(o.getFoodTaken() == 2.0){
@@ -42,13 +57,31 @@ public class InteractionAgent implements IRandomizer{
             }
         }
 
-        for(Organism o : toClone){
-            bufList.add(o);
-        }
+        bufList.addAll(toClone);
+
         setOrganisms(bufList);
         return bufList;
     }
 
+    /**
+     * sprawdza dodatkowe zachowania interakcyjne klas
+     */
+    private void checkSpecialAbilities() {
+        List<Organism> buff = new ArrayList<>();
+        for(Organism o : this.organisms){
+            if(o instanceof SubmissiveOrganism){
+                if(o.getFoodTaken() == 0.0){
+                    SubmissiveOrganism.submissiveCounter--;
+                }
+            }
+        }
+
+        this.organisms.addAll(buff);
+    }
+
+    /**
+     * losuje parametry dla organizmow z niecalkowitymi wspolczynnikami jedzenia
+     */
     private void resolveProbabilities(){
         for(Organism o : this.organisms){
             if(o.getFoodTaken() == 0.5){
@@ -58,5 +91,13 @@ public class InteractionAgent implements IRandomizer{
                 o.setFoodTaken((double)generateRandomNumberInRange(1,2));
             }
         }
+    }
+
+    /**
+     * Setter
+     * @param organisms lista organizmow
+     */
+    public void setOrganisms(List<Organism> organisms) {
+        this.organisms = organisms;
     }
 }

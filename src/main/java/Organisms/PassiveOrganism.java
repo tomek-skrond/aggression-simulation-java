@@ -3,7 +3,7 @@ package Organisms;
 import Organisms.Abstractions.Organism;
 
 /**
- *  * Organizm pasywny - współczynnik agresji = 1
+ * Organizm pasywny - współczynnik agresji = 1
  */
 public class PassiveOrganism extends Organism {
 
@@ -15,6 +15,12 @@ public class PassiveOrganism extends Organism {
         passiveCounter++;
     }
 
+    /**
+     * Konstruktor
+     * @param _hostility stopień agresji danego organizmu
+     * @param _foodTaken ilość jedzenia zebrana podczas walki
+     * @param _isAlive zmienna pokazująca czy organizm jest w stanie przeżyć do następnego cyklu
+     */
     public PassiveOrganism(double _reproductionRate, double _hostility,
                            double _foodTaken, double _isAlive){
         super();
@@ -43,7 +49,7 @@ public class PassiveOrganism extends Organism {
     }
 
     /**
-     * Funkcja interakcji
+     * Funkcja interakcji okreslajaca interakcje z innym organizmem(o1)
      * @param o1
      */
     @Override
@@ -66,6 +72,10 @@ public class PassiveOrganism extends Organism {
         }
     }
 
+    /**
+     * toString - zwraca String opisujący instancję Organizmu
+     * @return String
+     */
     @Override
     public String toString(){
         return "Passive " + super.toString();
