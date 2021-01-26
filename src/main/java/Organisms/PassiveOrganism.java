@@ -35,8 +35,8 @@ public class PassiveOrganism extends Organism {
     @Override
     public void objectInteraction(Organism o1){
         if(o1.getHostility() == 2.0){
-            this.setFoodTaken(0.0);
-            o1.setFoodTaken(2.0);
+            this.setFoodTaken(0.5);
+            o1.setFoodTaken(1.5);
         }
         if(o1.getHostility() == 1.5){
             this.setFoodTaken(0.5);

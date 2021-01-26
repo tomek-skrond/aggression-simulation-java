@@ -7,14 +7,12 @@ import Organisms.Abstractions.Organism;
  */
 
 public class Empty extends Organism {
-    public static int emptyCounter = 0;
 
     /**
      * Empty() - konstruktor domyslny
      * brak parametrow
      */
     public Empty(){
-        emptyCounter++;
     }
 
     /**
@@ -32,7 +30,6 @@ public class Empty extends Organism {
      */
     @Override
     public String toString(){
-        emptyCounter++;
         return "Empty " + super.toString();
     }
 }

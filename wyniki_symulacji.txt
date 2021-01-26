@@ -1,46 +1,16 @@
 
 ------------------------------
-cycle number: 0 A: 3  D: 11  P: 50  S: 20  O: 84 
-size of batches: 42
-------------------------------
-cycle number: 1 A: 5  D: 21  P: 47  S: 13  O: 86 
-size of batches: 43
-------------------------------
-cycle number: 2 A: 9  D: 32  P: 36  S: 9  O: 86 
-size of batches: 43
-------------------------------
-cycle number: 3 A: 14  D: 60  P: 15  S: 5  O: 94 
-size of batches: 47
-------------------------------
-cycle number: 4 A: 10  D: 56  P: 4  S: 4  O: 74 
-size of batches: 37
-------------------------------
-cycle number: 5 A: 8  D: 16  P: 0  S: 4  O: 28 
-size of batches: 14
-------------------------------
-cycle number: 6 A: 0  D: 0  P: 0  S: 8  O: 8 
+cycle number: 0 A: 2  D: 2  P: 2  S: 2  O: 8 
 size of batches: 4
 ------------------------------
-cycle number: 7 A: 0  D: 0  P: 0  S: 16  O: 16 
-size of batches: 8
+cycle number: 1 A: 2  D: 0  P: 2  S: 4  O: 8 
+size of batches: 4
 ------------------------------
-cycle number: 8 A: 0  D: 0  P: 0  S: 32  O: 32 
-size of batches: 16
+cycle number: 2 A: 4  D: 0  P: 0  S: 8  O: 12 
+size of batches: 6
 ------------------------------
-cycle number: 9 A: 0  D: 0  P: 0  S: 64  O: 64 
-size of batches: 32
+cycle number: 3 A: 8  D: 0  P: 0  S: 0  O: 8 
+size of batches: 4
 ------------------------------
-cycle number: 10 A: 0  D: 0  P: 0  S: 128  O: 128 
-size of batches: 64
-------------------------------
-cycle number: 11 A: 0  D: 0  P: 0  S: 256  O: 256 
-size of batches: 128
-------------------------------
-cycle number: 12 A: 0  D: 0  P: 0  S: 512  O: 512 
-size of batches: 256
-------------------------------
-cycle number: 13 A: 0  D: 0  P: 0  S: 1024  O: 1024 
-size of batches: 512
-------------------------------
-cycle number: 14 A: 0  D: 0  P: 0  S: 2048  O: 2048 
-size of batches: 1024
+cycle number: 4 A: 4  D: 0  P: 0  S: 0  O: 4 
+size of batches: 2

@@ -131,5 +131,20 @@ public class StructureOrganisationAgentTest extends TestCase {
         structOrg.initializeData();
 
     }
+
+    public void testValidateParity() {
+    }
+
+    public void testBackupOrganismSet() {
+    }
+
+    public void testGetSlice() {
+    }
+
+    public void testGatherCycleOutput() {
+    }
+
+    public void testFlushFood() {
+    }
 }
 

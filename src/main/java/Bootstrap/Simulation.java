@@ -15,11 +15,26 @@ import java.util.List;
  */
 public class Simulation implements IRandomizer {
 
+    /**
+     * decyduje o tym, czy zapis do pliku jest skrócony
+     */
     boolean isShortened;
-    String simulationNote = new String();
+    /**
+     * przechowuje informacje na temat symulacji, ktore sa zapisywane do pliku
+     */
+    String simulationNote = "";
+    /**
+     * licznik cykli symulacyjnych
+     */
     private int howManyCycles;
+    /**
+     * instancja klasy organizujacej struktury organizmow
+     */
     StructureOrganisationAgent structOrg;
-    private InteractionAgent interactions; //assign when all structures are organised(put in batches)
+    /**
+     * instancja klasy interakcji, odpowiadajacej za interakcje miedzy organizmami
+     */
+    InteractionAgent interactions; //assign when all structures are organised(put in batches)
 
     /**
      * Konstruktor klasy Symulacji
@@ -28,7 +43,7 @@ public class Simulation implements IRandomizer {
      * @param _passive liczba pasywnych osobnikow
      * @param _submissive liczba uleglych osobnikow
      * @param _howManyCycles liczba cykli
-     * @param isShortened zmienna decydujaca o sposobie zapisu (skrocony czy normalny)
+     * @param isShortened zmienna decydujaca o sposobie zapisu (skrocony czy normalny), skrocony zapis zapisuje dane do pliku csv
      * @throws Exception
      */
     public Simulation(int _aggressive,int _dominant,int _passive,int _submissive,int _howManyCycles,boolean isShortened) throws Exception {
@@ -57,7 +72,7 @@ public class Simulation implements IRandomizer {
 
         this.structOrg = new StructureOrganisationAgent(randomInts);
 
-        simulationMainLoop();
+
     }
 
     /**
@@ -67,6 +82,7 @@ public class Simulation implements IRandomizer {
      void simulationMainLoop() throws Exception {
         int cycleCounter = 0;
 
+        simulationNote = "";
         structOrg.initializeData();
 
         while(this.howManyCycles != cycleCounter){
@@ -81,6 +97,7 @@ public class Simulation implements IRandomizer {
                 writer.write(msg);
                 writer.close();
             };
+
             this.saveNote(results);
 
             this.setupInteractions();
@@ -98,7 +115,7 @@ public class Simulation implements IRandomizer {
     /**
      * metoda umozliwiajaca poprawne zduplikowanie organizmow
      */
-    private void executeDuplication() {
+    void executeDuplication() {
         List<Organism> duplicationResults = interactions.duplication();
         this.structOrg.setOrganisms(duplicationResults);
         this.structOrg.constructData(this.structOrg.getOrganisms());
@@ -113,19 +130,23 @@ public class Simulation implements IRandomizer {
 
     /**
      * Metoda aktualizujaca opis cyklu
-     * @param orgCounted tablica liczb organizmow w biezacym cyklu
-     * @param cycleCounter licznik cykli
+     * @param orgCounted tablica liczb organizmow w biezacym cyklu (orgCounted[0] - agresywne, [1] - dominujace, [2] - pasywne, [3] - ulegle)
+     * @param cycleCounter licznik cykli symulacyjnych
      */
     void updateSimulationNote(int[] orgCounted, int cycleCounter){
 
         if(this.isShortened){
+            if(this.simulationNote.equals("")){
+                this.simulationNote +=
+                        "cycle,aggresive,dominant,passive,submissive,batches_count" + "\n";
+            }
             this.simulationNote +=
-                           cycleCounter + "|" +
-                           " " + orgCounted[0] + "" +
-                           " " + orgCounted[1] + "" +
-                           " " + orgCounted[2] + "" +
-                           " " +  orgCounted[3] + "" +
-                           " " + "b: " + structOrg.getBatches().size() + "\n";
+                           cycleCounter + "," +
+                            + orgCounted[0] + "," +
+                            + orgCounted[1] + "," +
+                            + orgCounted[2] + "," +
+                            + orgCounted[3] + "," +
+                            + structOrg.getBatches().size() + "\n";
 
         }else{
             this.simulationNote +=
@@ -148,7 +169,7 @@ public class Simulation implements IRandomizer {
      */
     void saveNote(ResultToFile res) throws Exception {
         if(this.isShortened){
-            res.saveToFile(simulationNote,"wyniki_symulacji_short.txt");
+            res.saveToFile(simulationNote,"wyniki_symulacji_short.csv");
         }else{
             res.saveToFile(simulationNote,"wyniki_symulacji.txt");
         }

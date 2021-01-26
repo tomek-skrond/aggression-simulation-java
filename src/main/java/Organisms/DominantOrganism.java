@@ -6,7 +6,7 @@ import Organisms.Abstractions.Organism;
  * Organizm dominujący współczynnik agresji = 2
  */
 public class DominantOrganism extends Organism {
-    public static int dominantCounter = 0;
+    //public static int dominantCounter = 0;
 
     /**
      * Konstruktor domyslny
@@ -14,7 +14,6 @@ public class DominantOrganism extends Organism {
     public DominantOrganism(){
         super();
         this.hostility = 2.0;
-        dominantCounter++;
     }
 
     /**
@@ -28,7 +27,6 @@ public class DominantOrganism extends Organism {
 
         super(_hostility,_foodTaken,_isAlive);
         this.hostility = 2.0;
-        dominantCounter++;
     }
 
     /**

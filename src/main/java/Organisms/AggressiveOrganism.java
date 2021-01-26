@@ -7,7 +7,7 @@ import Organisms.Abstractions.Organism;
  **/
 public class AggressiveOrganism extends Organism {
 
-    public static int aggressiveCounter = 0;
+    //public static int aggressiveCounter = 0;
 
     /**
      * Konstruktor domyślny
@@ -15,7 +15,6 @@ public class AggressiveOrganism extends Organism {
     public AggressiveOrganism(){
         super();
         this.hostility = 1.5;
-        aggressiveCounter++;
     }
 
     /**
@@ -27,7 +26,6 @@ public class AggressiveOrganism extends Organism {
     public AggressiveOrganism(double _hostility,
                               double _foodTaken,double _isAlive){
         super(_hostility,_foodTaken,_isAlive);
-        aggressiveCounter++;
     }
 
     /**
@@ -41,8 +39,8 @@ public class AggressiveOrganism extends Organism {
             o1.setFoodTaken(0.0);
         }
         if(o1.getHostility() == 1.5){
-            this.setFoodTaken(1.5);
-            o1.setFoodTaken(0.5);
+            this.setFoodTaken(1.0);
+            o1.setFoodTaken(1.0);
         }
         if(o1.getHostility() == 1.0){
             this.setFoodTaken(2.0);
