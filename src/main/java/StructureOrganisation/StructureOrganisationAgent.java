@@ -17,7 +17,7 @@ public class StructureOrganisationAgent implements IRandomizer {
     private List<Organism> organisms;
     private List<OrganismPair> pairs;
     private List<Batch> batches;
-    private int [] paramsList;
+    int [] paramsList;
 
     /**
      * StructureOrganisationAgent
@@ -63,7 +63,8 @@ public class StructureOrganisationAgent implements IRandomizer {
 
     /**
      * generateOrganisms
-     * Funkcja generujaca liste organizmow gotowych do przetworzenia dalej
+     * Funkcja generujaca liste organizmow gotowych do przetworzenia dalej,
+     * organizmy generowane sa wedlug danych wejsciowych (paramsList)
      * @return List{Organism}
      */
     List<Organism> generateOrganisms(){//
@@ -103,7 +104,7 @@ public class StructureOrganisationAgent implements IRandomizer {
         if(!validateParity()){
 
             this.organisms.add(
-                    new SubmissiveOrganism()
+                    new PassiveOrganism()
             );
         }
     }
@@ -183,7 +184,7 @@ public class StructureOrganisationAgent implements IRandomizer {
     /**
      * gatherCycleOutput
      * funkcja zbierajaca koncowa liste organizmow jako wynik cyklu
-     * @return
+     * @return ArrayList{Organism}
      */
     public ArrayList<Organism> gatherCycleOutput(){
         ArrayList<Batch> inputBatches = this.getBatches();
@@ -286,6 +287,13 @@ public class StructureOrganisationAgent implements IRandomizer {
      */
     public ArrayList<Batch> getBatches() {
         return (ArrayList) this.batches;
+    }
+    /**
+     * setBatches
+     * setter
+     */
+    public void setBatches(List<Batch> b) {
+        this.batches = b;
     }
     /**
      * setOrganisms

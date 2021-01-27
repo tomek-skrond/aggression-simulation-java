@@ -1,13 +1,11 @@
 package Interactions;
 
 import Organisms.Abstractions.Organism;
-import Organisms.PassiveOrganism;
 import Organisms.SubmissiveOrganism;
 import StructureOrganisation.Batch;
 import StructureOrganisation.Interfaces.IRandomizer;
 import StructureOrganisation.StructureOrganisationAgent;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

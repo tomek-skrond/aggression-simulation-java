@@ -4,12 +4,11 @@ import Interactions.InteractionAgent;
 import Organisms.Abstractions.Organism;
 import Organisms.AggressiveOrganism;
 import Organisms.DominantOrganism;
-import StructureOrganisation.Batch;
-import StructureOrganisation.OrganismPair;
+
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 public class SimulationTest extends TestCase {
@@ -56,8 +55,33 @@ public class SimulationTest extends TestCase {
         assert(!s.simulationNote.contains(testString));
     }
 
-    public void testExecuteDuplication() {
-        List<Organism> orgs = Arrays.asList(new AggressiveOrganism(1.5, 2.0, 1.0),
-                new DominantOrganism(2.0,2.0,1.0));
+    public void testExecuteDuplication() throws Exception {
+
+        Simulation s = new Simulation();
+        List<Organism> orgs = new ArrayList<>();
+
+        orgs.add(new AggressiveOrganism(1.5,2.0,1.0));
+        orgs.add(new DominantOrganism(2.0,2.0,1.0));
+
+        for(Organism o : orgs){
+            System.out.println(o);
+        }
+
+        int orgLen = orgs.size();
+
+        s.structOrg.setOrganisms(orgs);
+        s.setupInteractions();
+        s.executeDuplication();
+
+        System.out.println();
+
+        for(Organism o : orgs){
+            System.out.println(o);
+        }
+
+        int currentSize = s.structOrg.getOrganisms().size();
+
+        assert(s.structOrg.getOrganisms() != null);
+        assert(2*orgLen == currentSize);
     }
 }

@@ -87,9 +87,11 @@ public class Simulation implements IRandomizer {
 
         while(this.howManyCycles != cycleCounter){
 
+            //data constructing section
             structOrg.constructData(structOrg.getOrganisms());
             int[] orgCounted = structOrg.countOrganisms();
 
+            //result gathering section
             this.updateSimulationNote(orgCounted,cycleCounter);
 
             ResultToFile results = (msg, filename) -> {
@@ -100,12 +102,15 @@ public class Simulation implements IRandomizer {
 
             this.saveNote(results);
 
+            //interactions section
             this.setupInteractions();
             interactions.fightForFood();
 
             executeDuplication();
             structOrg.backupOrganismSet();
             structOrg.setOrganisms(structOrg.gatherCycleOutput());
+
+            //end of cycle
             cycleCounter++;
         }
          System.out.println(simulationNote);

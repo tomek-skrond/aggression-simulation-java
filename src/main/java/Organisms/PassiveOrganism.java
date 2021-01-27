@@ -21,7 +21,7 @@ public class PassiveOrganism extends Organism {
      * @param _foodTaken ilość jedzenia zebrana podczas walki
      * @param _isAlive zmienna pokazująca czy organizm jest w stanie przeżyć do następnego cyklu
      */
-    public PassiveOrganism(double _reproductionRate, double _hostility,
+    public PassiveOrganism(double _hostility,
                            double _foodTaken, double _isAlive){
         super();
         this.hostility = 1.0;

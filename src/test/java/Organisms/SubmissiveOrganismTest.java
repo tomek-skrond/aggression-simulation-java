@@ -12,12 +12,14 @@ public class SubmissiveOrganismTest extends TestCase {
                 new AggressiveOrganism(), new DominantOrganism(),new PassiveOrganism(), new SubmissiveOrganism()
         };
 
+        SubmissiveOrganism.submissiveCounter = 100;
+        Organism.organismCounter = 1;
+
         for(Organism o : organismList){
             submissive.objectInteraction(o);
         }
 
-        SubmissiveOrganism.submissiveCounter = 100;
-        Organism.organismCounter = 1;
+
 
         assert(organismList[0].getFoodTaken() == 1.0);
         assert(organismList[1].getFoodTaken() == 1.5);
