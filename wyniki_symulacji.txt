@@ -1,16 +1,31 @@
 
 ------------------------------
-cycle number: 0 A: 2  D: 2  P: 2  S: 2  O: 8 
-size of batches: 4
+cycle number: 0 A: 100  D: 100  P: 100  S: 100  O: 400 
+size of batches: 200
 ------------------------------
-cycle number: 1 A: 2  D: 0  P: 2  S: 4  O: 8 
-size of batches: 4
+cycle number: 1 A: 112  D: 86  P: 72  S: 80  O: 350 
+size of batches: 175
 ------------------------------
-cycle number: 2 A: 4  D: 0  P: 0  S: 8  O: 12 
-size of batches: 6
+cycle number: 2 A: 117  D: 71  P: 47  S: 57  O: 292 
+size of batches: 146
 ------------------------------
-cycle number: 3 A: 8  D: 0  P: 0  S: 0  O: 8 
-size of batches: 4
+cycle number: 3 A: 122  D: 72  P: 20  S: 42  O: 256 
+size of batches: 128
 ------------------------------
-cycle number: 4 A: 4  D: 0  P: 0  S: 0  O: 4 
-size of batches: 2
+cycle number: 4 A: 116  D: 33  P: 14  S: 27  O: 190 
+size of batches: 95
+------------------------------
+cycle number: 5 A: 115  D: 26  P: 3  S: 26  O: 170 
+size of batches: 85
+------------------------------
+cycle number: 6 A: 119  D: 26  P: 3  S: 20  O: 168 
+size of batches: 84
+------------------------------
+cycle number: 7 A: 133  D: 20  P: 1  S: 8  O: 162 
+size of batches: 81
+------------------------------
+cycle number: 8 A: 119  D: 4  P: 1  S: 16  O: 140 
+size of batches: 70
+------------------------------
+cycle number: 9 A: 134  D: 0  P: 0  S: 0  O: 134 
+size of batches: 67

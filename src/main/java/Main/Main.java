@@ -40,7 +40,7 @@ public class Main {
         }
         if(check == 0){
 
-            new Simulation();
+            new Simulation(100,100,100,100,10,false);
 
         }else if(check != 1){
 

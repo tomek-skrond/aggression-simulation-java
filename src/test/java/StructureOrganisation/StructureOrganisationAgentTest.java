@@ -7,9 +7,7 @@ import Organisms.PassiveOrganism;
 import Organisms.SubmissiveOrganism;
 import junit.framework.TestCase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static Organisms.Enums.OrganismType.*;
