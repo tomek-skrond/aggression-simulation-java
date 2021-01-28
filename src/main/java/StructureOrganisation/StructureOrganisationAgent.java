@@ -5,7 +5,6 @@ import Organisms.Abstractions.Organism;
 import Organisms.Enums.OrganismType;
 import StructureOrganisation.Interfaces.IRandomizer;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -213,7 +212,7 @@ public class StructureOrganisationAgent implements IRandomizer {
     /**
      * flushFood
      * wyzerowanie jednostek jedzenia
-     * @param orgs
+     * @param orgs - organizmy
      */
     void flushFood(List<Organism> orgs) {//
         for(Organism o : orgs){
@@ -225,7 +224,7 @@ public class StructureOrganisationAgent implements IRandomizer {
      * updateBatches
      * zebranie par organizmow do Batchy
      * @param pairbuffArr pary organizmow
-     * @return
+     * @return List{OrganismPair}
      */
     List<Batch> updateBatches(List<OrganismPair> pairbuffArr) {//
         List<Batch> batchBuffArr = new ArrayList<>();
@@ -291,6 +290,7 @@ public class StructureOrganisationAgent implements IRandomizer {
     /**
      * setBatches
      * setter
+     * @param b List{Batch}
      */
     public void setBatches(List<Batch> b) {
         this.batches = b;
@@ -298,6 +298,7 @@ public class StructureOrganisationAgent implements IRandomizer {
     /**
      * setOrganisms
      * setter
+     * @param oArray ArrayList{Organism}
      */
     public void setOrganisms(ArrayList<Organism> oArray){
         this.organisms = oArray;
@@ -313,6 +314,7 @@ public class StructureOrganisationAgent implements IRandomizer {
     /**
      * setOrganisms
      * Setter
+     * @param organisms  List{Organism}
      */
     public void setOrganisms(List<Organism> organisms) {
         this.organisms = organisms;

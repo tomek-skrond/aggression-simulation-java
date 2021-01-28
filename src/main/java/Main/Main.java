@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class Main {
 
+    /**
+     *
+     * glowna metoda, obsluguje wybor trybow zapisu symulacji i tryb wpisywania parametrpw
+     */
     public static void main(String [] args) throws Exception {
 
         Scanner s = new Scanner(System.in);

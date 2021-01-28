@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"Bootstrap"},{"l":"Interactions"},{"l":"Main"},{"l":"Organisms"},{"l":"Organisms.Abstractions"},{"l":"Organisms.Enums"},{"l":"Organisms.Interfaces"},{"l":"ResultToFiles"},{"l":"StructureOrganisation"},{"l":"StructureOrganisation.Interfaces"}]
